@@ -1,0 +1,3 @@
+#!/bin/sh
+
+kill -15 $(ps -u $USER k -size -o pid=,%mem=,%cpu=,comm= |dmenu -i -l 15 |awk '{print $1}')

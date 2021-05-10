@@ -1,0 +1,14 @@
+#!/bin/sh
+
+browser="firefox"
+event="$(calcurse --next | sed "1d")"
+name="$(echo "$event" |  sed -E 's/.*\] ([^\t]*).*/\1/')"
+url="$(echo "$event" | grep -o "http\S*" )"
+
+if [ -z "$url" ]
+then
+	notify-send "$name"
+else
+	notify-send "$name" "opening link..."
+	eval $browser $url 1>/dev/null 2>&1 &
+fi
