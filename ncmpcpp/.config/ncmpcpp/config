@@ -1,94 +1,142 @@
 ncmpcpp_directory = "~/.config/ncmpcpp"
 lyrics_directory = "~/.local/share/lyrics"
 mpd_music_dir = "~/Music"
-# message_delay_time = "1"
-# visualizer_type = "spectrum"
-# song_list_format = {$4%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
-# song_status_format = $b{{$8"%t"}} $3by {$4%a{ $3in $7%b{ (%y)}} $3}|{$8%f}
-# song_library_format = {%n - }{%t}|{%f}
-# alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
-# alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
-# current_item_prefix = $(cyan)$r$b
-# current_item_suffix = $/r$(end)$/b
-# current_item_inactive_column_prefix = $(magenta)$r
-# current_item_inactive_column_suffix = $/r$(end)
-# playlist_display_mode = columns
-# browser_display_mode = columns
-# progressbar_look =  "->"
-# media_library_primary_tag = album_artist
-# media_library_albums_split_by_date = no
-# startup_screen = "media_library"
-# display_volume_level = no
-# ignore_leading_the = yes
-external_editor = nvim
-use_console_editor = yes
-# empty_tag_color = magenta
-# main_window_color = white
-# progressbar_color = black:b
-# progressbar_elapsed_color = blue:b
-# statusbar_color = red
-# statusbar_time_color = cyan:b
-jump_to_now_playing_song_at_start = "yes"
-# selected_item_prefix = "* "
-# discard_colors_if_item_is_selected = "no"
-# 
-follow_now_playing_lyrics = yes
-fetch_lyrics_for_current_song_in_background = yes
 
-### Behaviour ###
-# execute_on_song_change = "bash ~/.config/ncmpcpp/mpd-notification"
-message_delay_time = 1
-playlist_disable_highlight_delay = 2
+# MPD
+mpd_host = "127.0.0.1"
+mpd_port = "6600"
+
+mpd_crossfade_time = 2
+
+# VISUALIZER
+visualizer_in_stereo = "no"
+visualizer_data_source = "/tmp/mpd.fifo"
+visualizer_fps = 60
+visualizer_output_name = "Visualizer"
+visualizer_type = "wave"
+visualizer_look = "▐"
+visualizer_color = "red,magenta,cyan,green,yellow"
+visualizer_spectrum_smooth_look = no
+
+# GLOBAL
+cyclic_scrolling = "yes"
+mouse_support = "yes"
+mouse_list_scroll_whole_page = "yes"
+lines_scrolled = "1"
+message_delay_time = "1"
+playlist_shorten_total_times = "yes"
+playlist_display_mode = "columns"
+browser_display_mode = "columns"
+search_engine_display_mode = "columns"
+playlist_editor_display_mode = "columns"
 autocenter_mode = "yes"
 centered_cursor = "yes"
-ignore_leading_the = "yes"
-allow_for_physical_item_deletion = "no"
+user_interface = "classic"
+follow_now_playing_lyrics = "yes"
+locked_screen_width_part = "50"
+ask_for_locked_screen_width_part = "yes"
+display_bitrate = "no"
+external_editor = "nvim"
+main_window_color = "default"
+startup_screen = "playlist"
 
-### Visualizer ###
-visualizer_fifo_path = /tmp/mpd.fifo
-visualizer_output_name = "mpd_visualizer"
-visualizer_in_stereo = "yes"
-visualizer_sync_interval = 30
-visualizer_look = ●●
-
-### Appearance ###
-colors_enabled = "yes"
-playlist_display_mode = "columns"
-user_interface = classic
-# user_interface = alternative
-volume_color = "white"
-
-# Window #
-song_window_title_format = "Music"
-# song_window_title_format = "{%a - }{%t}|{%f}"
-statusbar_visibility = "no"
-header_visibility = "no"
-titles_visibility = "no"
-
-# Progress bar #
-progressbar_look = "▂▂▂"
+# PROGRESSBAR
+progressbar_look = "━━━"
+#progressbar_look = "▃▃▃"
+progressbar_elapsed_color = 5
 progressbar_color = "black"
-progressbar_elapsed_color = "yellow"
 
-# Alternative UI
-alternative_ui_separator_color = "black"
-alternative_header_first_line_format = $b$5«$/b$5« $b$8{%t}|{%f}$/b $5»$b$5»$/b 
-alternative_header_second_line_format = {$b{$2%a$9}{ - $7%b$9}{ ($2%y$9)}}|{%D}
+# UI VISIBILITY
+header_visibility = "no"
+statusbar_visibility = "yes"
+titles_visibility = "no"
+enable_window_title = "yes"
 
-# Song list #
-song_status_format= "$7%t"
-song_list_format = "  %t $R%a %l  "
-song_columns_list_format = "(53)[white]{tr} (45)[blue]{a}"
-
-song_library_format = {{%a - %t} (%b)}|{%f}
-
-# Colors #
-main_window_color = "blue"
-current_item_prefix = "$(blue)$r"
-current_item_suffix = "$/r$(end)"
-
-current_item_inactive_column_prefix = red
-current_item_inactive_column_suffix = red
-
+# COLOR
+statusbar_color = "white"
 color1 = "white"
-color2 = "red"
+color2 = "blue"
+
+# UI FORMAT
+now_playing_prefix = "$b$2$7 "
+now_playing_suffix = "  $/b$8"
+current_item_prefix = "$b$7$/b$3 "
+current_item_suffix = "  $8"
+
+song_columns_list_format = "(50)[]{t|fr:Title} (0)[magenta]{a}"
+
+song_list_format = " {%t $R   $8%a$8}|{%f $R   $8%l$8} $8"
+
+song_status_format = "$b$6$7[$8      $7]$6 $2 $7{$8 %b }|{$8 %t }|{$8 %f }$7 $8"
+
+song_window_title_format = "Now Playing .."
+
+# external_editor = nvim
+# use_console_editor = yes
+# jump_to_now_playing_song_at_start = "yes"
+# # selected_item_prefix = "* "
+# # discard_colors_if_item_is_selected = "no"
+# # 
+# follow_now_playing_lyrics = yes
+# fetch_lyrics_for_current_song_in_background = yes
+# 
+# ### Behaviour ###
+# # execute_on_song_change = "bash ~/.config/ncmpcpp/mpd-notification"
+# message_delay_time = 1
+# playlist_disable_highlight_delay = 2
+# autocenter_mode = "yes"
+# centered_cursor = "yes"
+# ignore_leading_the = "yes"
+# allow_for_physical_item_deletion = "no"
+# 
+# ### Visualizer ###
+# visualizer_fifo_path = /tmp/mpd.fifo
+# visualizer_output_name = "mpd_visualizer"
+# visualizer_in_stereo = "yes"
+# visualizer_sync_interval = 30
+# visualizer_look = ●●
+# 
+# ### Appearance ###
+# colors_enabled = "yes"
+# playlist_display_mode = "columns"
+# user_interface = classic
+# # user_interface = alternative
+# volume_color = "white"
+# 
+# # Window #
+# song_window_title_format = "Music"
+# # song_window_title_format = "{%a - }{%t}|{%f}"
+# statusbar_visibility = "no"
+# header_visibility = "no"
+# titles_visibility = "no"
+# 
+# # Progress bar #
+# progressbar_look = "▂▂▂"
+# progressbar_color = "black"
+# progressbar_elapsed_color = "yellow"
+# 
+# # Alternative UI
+# alternative_ui_separator_color = "black"
+# alternative_header_first_line_format = $b$5«$/b$5« $b$8{%t}|{%f}$/b $5»$b$5»$/b 
+# alternative_header_second_line_format = {$b{$2%a$9}{ - $7%b$9}{ ($2%y$9)}}|{%D}
+# 
+# # Song list #
+# song_status_format= "$7%t"
+# song_list_format = "  %t $R%a %l  "
+# song_columns_list_format = "(53)[white]{tr} (45)[blue]{a}"
+# 
+# song_library_format = {{%a - %t} (%b)}|{%f}
+# 
+# # Colors #
+# main_window_color = "blue"
+# current_item_prefix = "$(blue)$r"
+# current_item_suffix = "$/r$(end)"
+# 
+# current_item_inactive_column_prefix = red
+# current_item_inactive_column_suffix = red
+# 
+# color1 = "white"
+# color2 = "red"
+# 
+
+
