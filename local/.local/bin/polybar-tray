@@ -1,0 +1,11 @@
+#!/bin/sh
+
+status=${1}
+
+if [ $status = 'on' ]; then
+    polybar tray &
+elif [ $status = 'off' ]; then
+    kill `ps aux | awk '/[p]olybar tray/ {print $2}'`
+else
+    echo 'Wrong argument! [on/off]'
+fi

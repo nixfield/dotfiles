@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+dependency_check ()
+{
+	[[ -z $(which dmenu) || -z $(which notify-send) || -z $(which mpv) || -z $(which xclip) ]] &>/dev/null &&
+	echo -e "Make sure you have the following dependencies:\n+ dmenu\n+ libnotify\n+ mpv\n+ xclip" && exit
+}
+
+pause ()
+{
+	pkill -u $USER -i mpv &>/dev/null
+}
+
+random_play ()
+{
+	local -a channel=("${urls[@]}")
+	pause
+	mpv --no-video "${channel[RANDOM % ${#channel[@]}]}" &>/dev/null
+}
+
+dependency_check;
+
+declare -A urls=([Lofi]="https://www.youtube.com/watch?v=5qap5aO4i9A"
+		[Piano]="https://www.youtube.com/watch?v=XULUBg_ZcAU"
+		[Jazz]="https://www.youtube.com/watch?v=B2fKHoG_aLU"
+		[Rain]="https://www.youtube.com/watch?v=mPZkdNFkNps"
+		[Cafe]="https://www.youtube.com/watch?v=VMAPTo7RVCo"
+		[Nature]="https://www.youtube.com/watch?v=eKFTSSKCzWA")
+
+printf -v all_selection '%s\n' ${!urls[@]} Clipboard Local Random Stop
+selection=$(dmenu -i -p "What to play?" <<< "$all_selection") && pause
+
+if [ "${urls[$selection]}" ]; then
+	mpv --no-video "${urls[$selection]}" &>/dev/null
+else
+	case $selection in
+		Clipboard) mpv --no-video "$(xclip -o)" &>/dev/null ;;
+		Random) random_play ;;
+		Stop) pause && exit ;;
+		Local) printf -v local_song '%s\n' "$(ls $HOME/Music/)" &&
+		       chosen_song="$(dmenu -i -p "Local song" -l 20 <<< "$local_song")" &&
+		       mpv --no-video "$HOME/Music/$chosen_song" ;;
+		*) notify-send "Nothing played" && exit ;;
+	esac
+fi
