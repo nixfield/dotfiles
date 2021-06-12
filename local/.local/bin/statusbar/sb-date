@@ -26,5 +26,8 @@ case $BLOCK_BUTTON in
 	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-# date "+%a,%I:%M%p" 
-date "+(%a)%d %b %Y|%I:%M%p"
+date_formatted=$(date "+%d %b %Y")
+clock_formatted=$(date "+%I:%M%p")
+
+# date "+(%a)%d %b %Y|%I:%M%p"
+echo "" $date_formatted "" $clock_formatted
