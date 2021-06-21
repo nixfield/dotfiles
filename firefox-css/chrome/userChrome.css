@@ -1,6 +1,7 @@
 /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/curved_tabs.css made available under Mozilla Public License v. 2.0
 See the above repository for updates as well as full license text. */
 
+/* ========================================================================================= */
 /* Makes tabs more curvy. Also disables tab separators since there's no easy way to make the look good */
 
 #tabbrowser-tabs{
@@ -106,7 +107,9 @@ See the above repository for updates as well as full license text. */
 
 /* Makes black favicons more visible on dark background, contrast will be lowered though */
 .tab-icon-image{ filter: invert(40%) contrast(250%) saturate(250%) !important; }
+/* ========================================================================================= */
 
+/* ========================================================================================= */
 /* Make tabs and navbar appear side-by-side tabs on right */
 /* Use page_action_buttons_on_hover.css to hide page-action-buttons to save more space for the address */
 /* Toolbars will be shown normally if window width goes below the value below */
@@ -174,7 +177,9 @@ See the above repository for updates as well as full license text. */
 }
 /* Fix customization view */
 #customization-panelWrapper > .panel-arrowbox > .panel-arrow{ margin-inline-end: initial !important; }
+/* ========================================================================================= */
 
+/* ========================================================================================= */
 /* Makes panels, menupopups, urlbar and searchbar rounded */
 /* Modify the rounding size here */
 :root{ --uc-menupopup-border-radius: 15px }
@@ -196,26 +201,9 @@ searchbar#searchbar,
 /* Reposition the panel-arrow  */
 panel[type="arrow"]{ margin-inline-end: calc(-10px - var(--uc-menupopup-border-radius)) !important; }
 .panel-arrow{ margin-inline: var(--uc-menupopup-border-radius) !important; }
+/* ========================================================================================= */
 
-/* Show pinned tabs on right side of normal tabs */
-/* This is stupid hack that barely works and might lead to some very unexpected behavior */
-
-.tabbrowser-arrowscrollbox > spacer,
-.scrollbutton-up[orient="horizontal"]~spacer{ display: none }
-
-.tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox,
-.scrollbutton-up[orient="horizontal"]~scrollbox{ -moz-box-direction: inherit; -moz-box-pack: end }
-
-.tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox::after,
-.scrollbutton-up[orient="horizontal"]~scrollbox::after{ display: -moz-box; content: ""; -moz-box-flex: 1; -moz-box-ordinal-group: 2 }
-
-#tabs-newtab-button{ -moz-box-ordinal-group: 2 }
-.tabbrowser-tab[pinned]{ -moz-box-ordinal-group: 3 }
-
-#tabbrowser-tabs[positionpinnedtabs]{ direction: rtl }
-#tabbrowser-tabs[positionpinnedtabs] > arrowscrollbox { -moz-box-direction: reverse }
-.tab-content{ direction: ltr }
-
+/* ========================================================================================= */
 /* Page action-buttons "slide in" when cursor is on top of them and don't reserve space when not used */
 
 #page-action-buttons > *[class^=urlbar-icon]{
@@ -230,7 +218,10 @@ panel[type="arrow"]{ margin-inline-end: calc(-10px - var(--uc-menupopup-border-r
   opacity: 1;
   margin-inline-end: 0px !important;
 }
+/* ========================================================================================= */
 
+
+/* ========================================================================================= */
 /* Makes the contents of the overflow menu appear in a three column grid */
 /* Hides button labels */
 
@@ -250,7 +241,10 @@ panel[type="arrow"]{ margin-inline-end: calc(-10px - var(--uc-menupopup-border-r
 
 #widget-overflow-mainView #widget-overflow-fixed-list .subviewbutton-nav::after,
 #widget-overflow-mainView #widget-overflow-fixed-list .toolbarbutton-text{ display: none }
+/* ========================================================================================= */
 
+
+/* ========================================================================================= */
 /* Always show tab close button on hover and never otherwise */
 .tabbrowser-tab .tab-close-button{
   display:none;
@@ -276,7 +270,10 @@ panel[type="arrow"]{ margin-inline-end: calc(-10px - var(--uc-menupopup-border-r
   background-color: var(--tab-icon-overlay-stroke, black) !important;
   border-radius: 10px !important;
 }
+/* ========================================================================================= */
 
+
+/* ========================================================================================= */
 /* Makes menubar appear as overlay in the top left corner */
 /* Dummy variable to support both versions 89-90 */
 :root{ --tab-block-margin: var(--proton-tab-block-margin) }
@@ -315,4 +312,37 @@ panel[type="arrow"]{ margin-inline-end: calc(-10px - var(--uc-menupopup-border-r
 @supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled"){
   #toolbar-menubar[autohide="true"]:not([inactive]) > .titlebar-buttonbox-container{ display: none }  
 }
+/* ========================================================================================= */
+
+
+/* ========================================================================================= */
+/* Hide the normal loading indicator (just show tab-icon instead) and make the top tab-line bounce left-to-right */
+@keyframes tabline-anim{from{background-position-x: left}to{background-position-x: right}}
+.tabbrowser-tab[busy] > stack >  .tab-background::before,
+.tab-background[selected]::before{
+  content: "";
+  display: -moz-box;
+  height: 2px;
+  opacity: 0;
+  background-image: linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.2));
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: background-size 80ms linear;
+}
+
+.tabbrowser-tab[busy] > stack > .tab-background::before{
+  background-size: 10%;
+  background-image: linear-gradient(var(--tab-line-color),var(--tab-line-color));
+  opacity: 0.7;
+  animation: tabline-anim 400ms alternate infinite ease-in-out;
+}
+
+.tabbrowser-tab .tab-throbber{ display: none }
+.tabbrowser-tab .tab-icon-image{ display: -moz-box !important; }
+
+/* All deselected tabs should have text with lower visibility */
+.tab-label:not([selected="true"]) {
+    opacity: 0.6;
+}
+/* ========================================================================================= */
 
