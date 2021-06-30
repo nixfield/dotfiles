@@ -121,7 +121,7 @@ super + Insert
 #   {zoom, toggle floating} active window
 
 # super + {grave,e,c,m}
-#   scratchpads {calc, ranger, calcurse, ncmpcpp}
+#   scratchpads {calc, lf, calcurse, ncmpcpp}
 
 # super + shift + Return
 #   scratchpads terminal
@@ -139,7 +139,7 @@ super + Return
 super + {q,w}
     {dmenulofi, dmenusearch}
 
-super + shift + {q,w,e}
+super + shift + {q,w,r}
     {YTFZF_EXTMENU_LEN=160 ytfzf -Dl, firefox, thunar}
 
 super + {_,shift} + d
