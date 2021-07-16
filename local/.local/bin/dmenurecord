@@ -42,6 +42,31 @@ screencast() { \
 	updateicon "辶 "
        	}
 
+screenwindow()
+{
+    xwininfo | {
+        while IFS=: read -r k v; do
+            case "$k" in
+            *"Absolute upper-left X"*) x=$v;;
+            *"Absolute upper-left Y"*) y=$v;;
+            *"Border width"*) bw=$v ;;
+            *"Width"*) w=$v;;
+            *"Height"*) h=$v;;
+            esac
+        done
+        for i in 3 2 1; do echo "$i"; sleep 1; done
+        ffmpeg -y -f x11grab -framerate 30 \
+               -video_size "$((w))x$((h))" \
+               -i "+$((x+bw)),$((y+bw))" \
+                -f alsa -i default \
+                -r 30 \
+                -c:v libx264 -pix_fmt yuv420p -preset veryfast -q:v 1 \
+                "$HOME/Videos/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
+                echo $! > /tmp/recordingpid
+                updateicon "辶 "
+    }
+}
+
 video() {
 	notify-send "Start Recording" "With:\nVideo On\nAudio Off"
 	ffmpeg \
@@ -84,9 +109,10 @@ audio() { \
 	}
 
 askrecording() { \
-	choice=$(printf "screencast\\nvideo\\nvideo selected\\naudio\\nwebcam\\nwebcam (hi-def)" | dmenu -i -p "Select recording style:")
+	choice=$(printf "screencast\\nscreenwindow\\nvideo\\nvideo selected\\naudio\\nwebcam\\nwebcam (hi-def)" | dmenu -i -p "Select recording style:")
 	case "$choice" in
 		screencast) screencast;;
+		screenwindow) screenwindow;;
 		audio) audio;;
 		video) video;;
 		*selected) videoselected;;
@@ -118,11 +144,13 @@ videoselected()
 	updateicon "辶"
 }
 
+
 case "$1" in
 	screencast) screencast;;
 	audio) audio;;
 	video) video;;
 	*selected) videoselected;;
 	kill) killrecording;;
+    screenwindow) screenwindow;;
 	*) ([ -f /tmp/recordingpid ] && asktoend && exit) || askrecording;;
 esac

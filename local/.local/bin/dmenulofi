@@ -25,6 +25,7 @@ declare -A urls=([Lofi]="https://www.youtube.com/watch?v=5qap5aO4i9A"
 		[Jazz]="https://www.youtube.com/watch?v=B2fKHoG_aLU"
 		[Rain]="https://www.youtube.com/watch?v=mPZkdNFkNps"
 		[Cafe]="https://www.youtube.com/watch?v=VMAPTo7RVCo"
+        [Indo]="https://www.youtube.com/watch?v=386vQ5jErho"
 		[Nature]="https://www.youtube.com/watch?v=eKFTSSKCzWA")
 
 printf -v all_selection '%s\n' ${!urls[@]} Clipboard Local Random Stop

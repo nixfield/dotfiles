@@ -136,8 +136,8 @@ super + BackSpace
 super + Return
     st
 
-super + {q,w}
-    {dmenulofi, dmenusearch}
+super + {q,w,r,b}
+    {dmenulofi, dmenusearch, st -e lfrun, feh --bg-fill --randomize ~/Pictures/wall/*}
 
 super + shift + {q,w,r}
     {YTFZF_EXTMENU_LEN=160 ytfzf -Dl, firefox, thunar}
@@ -153,11 +153,8 @@ super + {_,shift} + z
     {polybar-tray on,polybar-tray off}
 
 # music contorl
-super + p
-    mpc toggle
-
-super + {period,comma}
-    {mpc next, mpc prev}
+super + {p, period,comma}
+    mpc {toggle, next, prev}
 
 super + shift + {period,comma}
     {mpc seek +60, mpc seek -60}

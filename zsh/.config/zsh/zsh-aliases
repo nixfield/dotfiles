@@ -81,6 +81,12 @@ alias \
     mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist" \
     mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist" 
 
+# lampp
+alias \
+    xa="sudo /opt/lampp/lampp start" \
+    xas="sudo /opt/lampp/lampp stop" \
+    xar="sudo /opt/lampp/lampp restart" \
+
 alias \
 	p="sudo pacman" \
 	cat="bat" \
@@ -96,13 +102,11 @@ alias \
 	ttq="curl http://api.quotable.io/random|jq '[.text=.content|.attribution=.author]'|tt -quotes -" \
     config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME' \
     topdf="libreoffice --headless --invisible --convert-to pdf" \
+    allpdf='for file in *.pptx *.ppt;do libreoffice --headless --invisible --convert-to pdf $file;rm $file;done' \
     bagi='curl -F"file=@$(find $pwd -type f | fzf)" 0x0.st' \
     tte="tt -quotes en" \
     gc="git clone" \
     pac="nvim ~/Documents/localpkglist.txt" \
     za="zathura" \
+    lf="lfrun" \
 
-alias \
-    xa="sudo /opt/lampp/lampp start" \
-    xas="sudo /opt/lampp/lampp stop" \
-    xar="sudo /opt/lampp/lampp restart" \

@@ -1,192 +1,115 @@
-/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/curved_tabs.css made available under Mozilla Public License v. 2.0
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome made available under Mozilla Public License v. 2.0
 See the above repository for updates as well as full license text. */
-
-/* ========================================================================================= */
-/* Makes tabs more curvy. Also disables tab separators since there's no easy way to make the look good */
-
-#tabbrowser-tabs{
-  --uc-tab-curve-size:17px; /* 10px looks about like chromium - 17px looks close to Australis tabs */
-  --uc-tabs-scrollbutton-border: 0px;
-  --proton-tab-block-margin:0px;
-  --tab-block-margin:0px;
-  --tab-min-height: 34px;
-  --uc-tab-line-color: rgb(10, 132, 255);
-}
-
-.tabbrowser-tab{
-  padding-inline: 0px !important; /* By default, proton tabs have 2px + 2px = 4px space between them */
-}
-
-#TabsToolbar{ --toolbarbutton-inner-padding: 6px !important; }
-
-.tabbrowser-tab:hover{ --uc-tab-fill: rgba(0,0,0,.1) }
-.tabbrowser-tab[selected]{ --uc-tab-curve-padding: 1px } 
-#TabsToolbar[brighttext] .tabbrowser-tab:hover{ --uc-tab-fill: rgba(255,255,255,.1) }
-.titlebar-spacer[type="pre-tabs"],
-.tabbrowser-tab::after{ border: none !important; }
-
-.tabbrowser-tab:hover > stack::before,
-.tabbrowser-tab:hover > stack::after,
-.tabbrowser-tab[selected] > stack::before,
-.tabbrowser-tab[selected] > stack::after{
-  width: var(--uc-tab-curve-size);
-  height: 100%;
-  display: block;
-  position: absolute;
-  content: "";
-  fill: var(--uc-tab-fill);
-  -moz-context-properties: fill,stroke;
-  left: calc(var(--uc-tab-curve-padding,0px) - var(--uc-tab-curve-size));
-  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgc3Ryb2tlLXdpZHRoPSIxLjIiIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgbWVldCIgdmlld0JveD0iMCAwIDE3IDE2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cGF0aCBkPSJNMCAxNyBMMCAxNiBBMTYgMTYgMCAwIDAgMTYgMCBMIDE4IDAgTCAxOCAxNyBaIiBmaWxsPSJjb250ZXh0LWZpbGwiPjwvcGF0aD4NCiAgPHBhdGggZD0iTTAgMTYgQTE2IDE2IDAgMCAwIDE2IDAiIHN0cm9rZT0iY29udGV4dC1zdHJva2UiIGZpbGw9InRyYW5zcGFyZW50Ij48L3BhdGg+DQo8L3N2Zz4");
-  background-size: var(--uc-tab-curve-size);
-  background-repeat: no-repeat;
-  background-position-y: bottom;
-  transform: scaleY(var(--uc-tab-vertical-transform));
-  z-index:1;
-}
-
-.tabbrowser-tab[selected] > stack::before,
-.tabbrowser-tab[selected] > stack::after{
-  fill: var(--lwt-selected-tab-background-color,var(--toolbar-bgcolor)) !important;
-  stroke: var(--tabs-border-color,transparent);
-}
-
-.tabbrowser-tab:hover > stack::after,
-.tabbrowser-tab[selected] > stack::after{
-  left: auto;
-  right: calc(var(--uc-tab-curve-padding,0px) - var(--uc-tab-curve-size));
-  transform: scaleX(-1);
-}
-
-.tabbrowser-tab:hover > stack > .tab-background,
-.tab-background[selected]{
-  border-radius: var(--uc-tab-curve-size) var(--uc-tab-curve-size) 0 0 !important;
-  overflow: -moz-hidden-unscrollable
-}
-
-#tabbrowser-tabs:not([positionpinnedtabs]) .tabbrowser-tab:first-child,
-#tabbrowser-tabs[positionpinnedtabs] .tabbrowser-tab[pinned]+.tabbrowser-tab:not([pinned]){ 
-  margin-inline-start: var(--uc-tab-curve-size) !important;
-}
-
-#scrollbutton-up,
-#scrollbutton-down{ border-block-width: var(--uc-tabs-scrollbutton-border,0px) !important; }
-.tab-background[selected]{ border: 1px solid var(--tabs-border-color) !important; border-bottom: none !important }
-
-.tab-context-line{
-  -moz-box-ordinal-group: 2;
-  margin-block: 0 !important;
-}
-
-/* Annoying fix to prevent hovering of last tab to trigger tab overflow, better solution wanted */
-.tabbrowser-tab[last-visible-tab]{ margin-inline-end: var(--uc-tab-curve-size) !important; }
-
-/* OPTIONAL - COLORS - show tabs border, selected tab line and make selected tab match the main toolbar color. Also disables tab shadow */
-/*
-#navigator-toolbox{ --tabs-border-color: color-mix(in srgb, currentcolor, transparent 80%) !important; }
-#tabbrowser-tabs{ --lwt-selected-tab-background-color: var(--toolbar-bgcolor) }
-.tabbrowser-tab .tab-background{ border-top: none !important; box-shadow: none !important; }
-
-.tab-background[selected]::before{
-  content: "";
-  display: -moz-box;
-  height: 2px;
-  background: var(--uc-tab-line-color) !important;
-}
-*/
-
-
-/* OPTIONAL - uncomment the following to flip the curves vertically - maybe useful for tabs on bottom ? */
-/*
-.tab-background{ -moz-box-direction: reverse }
-.tabbrowser-tab:hover > stack > .tab-background,
-.tab-background[selected]{ border-radius: 0 0 var(--uc-tab-curve-size) var(--uc-tab-curve-size) !important }
-.tabbrowser-tab > stack::before{ transform: scaleY(-1) !important; }
-.tabbrowser-tab > stack::after{ transform: scaleY(-1) scaleX(-1) !important; }
-*/
-
-/* Makes black favicons more visible on dark background, contrast will be lowered though */
-.tab-icon-image{ filter: invert(40%) contrast(250%) saturate(250%) !important; }
-/* ========================================================================================= */
 
 /* ========================================================================================= */
 /* Make tabs and navbar appear side-by-side tabs on right */
 /* Use page_action_buttons_on_hover.css to hide page-action-buttons to save more space for the address */
 /* Toolbars will be shown normally if window width goes below the value below */
 /* Modify it to suit your needs */
-@media screen and (min-width: 700px){
-  
-  :root[uidensity="compact"]{
+@media screen and (min-width: 800px) {
+  :root[uidensity="compact"] {
     --tab-block-margin: 2px !important;
     --proton-tab-block-margin: 2px !important;
-    }
-  
+  }
+
   /* Modify these to change relative widths or default height */
-  #navigator-toolbox{
+  #navigator-toolbox {
     --uc-navigationbar-width: 40vw;
     --uc-toolbar-height: 40px;
     --uc-urlbar-min-width: 50vw; /* minimum width for opened urlbar */
   }
-  @media (-moz-proton){
-    #scrollbutton-up,#scrollbutton-down{ border-block-width: 2px !important; }
+  @media (-moz-proton) {
+    #scrollbutton-up,
+    #scrollbutton-down {
+      border-block-width: 2px !important;
+    }
   }
-/* prevent urlbar overflow on narrow windows */
-/* Dependent on how many items are in navigation toolbar ADJUST AS NEEDED */
-  @media screen and (max-width: 1500px){
-    #urlbar-container{ min-width:unset !important }
+  /* prevent urlbar overflow on narrow windows */
+  /* Dependent on how many items are in navigation toolbar ADJUST AS NEEDED */
+  @media screen and (max-width: 1500px) {
+    #urlbar-container {
+      min-width: unset !important;
+    }
   }
 
   /* Override for other densities */
-  :root[uidensity="compact"] #navigator-toolbox{ --uc-toolbar-height: 34px; }
-  :root[uidensity="touch"] #navigator-toolbox{ --uc-toolbar-height: 44px; }
+  :root[uidensity="compact"] #navigator-toolbox {
+    --uc-toolbar-height: 34px;
+  }
+  :root[uidensity="touch"] #navigator-toolbox {
+    --uc-toolbar-height: 44px;
+  }
 
-  #TabsToolbar{
+  #TabsToolbar {
     margin-left: var(--uc-navigationbar-width);
     --tabs-navbar-shadow-size: 0px;
   }
-  #tabbrowser-tabs{
-  --tab-min-height: calc(var(--uc-toolbar-height) - 2 * var(--tab-block-margin,0px)) !important;
-}
-  
+  #tabbrowser-tabs {
+    --tab-min-height: calc(
+      var(--uc-toolbar-height) - 2 * var(--tab-block-margin, 0px)
+    ) !important;
+  }
+
   /* This isn't useful when tabs start in the middle of the window */
-  .titlebar-spacer[type="pre-tabs"]{ display: none }
-  
-  #navigator-toolbox > #nav-bar{
-    margin-right:calc(100vw - var(--uc-navigationbar-width));
+  .titlebar-spacer[type="pre-tabs"] {
+    display: none;
+  }
+
+  #navigator-toolbox > #nav-bar {
+    margin-right: calc(100vw - var(--uc-navigationbar-width));
     margin-top: calc(0px - var(--uc-toolbar-height));
   }
 
   /* Window drag space  */
-  :root[tabsintitlebar="true"] #nav-bar{ padding-left: 24px !important }
+  :root[tabsintitlebar="true"] #nav-bar {
+    padding-left: 24px !important;
+  }
 
-/* Rules specific to window controls on right layout */
-  @supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled"){
-    .titlebar-buttonbox-container{ position: fixed; display: block; left: 0px; z-index: 3; }
-    :root[tabsintitlebar="true"] #nav-bar{ padding-left: 96px !important; padding-right: 0px !important; }
+  /* Rules specific to window controls on right layout */
+  @supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled") {
+    .titlebar-buttonbox-container {
+      position: fixed;
+      display: block;
+      left: 0px;
+      z-index: 3;
+    }
+    :root[tabsintitlebar="true"] #nav-bar {
+      padding-left: 96px !important;
+      padding-right: 0px !important;
+    }
   }
 
   /* 1px margin on touch density causes tabs to be too high */
-  .tab-close-button{ margin-top: 0 !important }
+  .tab-close-button {
+    margin-top: 0 !important;
+  }
 
   /* Make opened urlbar overlay the toolbar */
-  #urlbar[open]:focus-within{ min-width: var(--uc-urlbar-min-width,none) !important; }
+  #urlbar[open]:focus-within {
+    min-width: var(--uc-urlbar-min-width, none) !important;
+  }
 
   /* Hide dropdown placeholder */
-  #urlbar-container:not(:hover) .urlbar-history-dropmarker{ margin-inline-start: -28px; }
-  
+  #urlbar-container:not(:hover) .urlbar-history-dropmarker {
+    margin-inline-start: -28px;
+  }
 }
 /* Fix customization view */
-#customization-panelWrapper > .panel-arrowbox > .panel-arrow{ margin-inline-end: initial !important; }
+#customization-panelWrapper > .panel-arrowbox > .panel-arrow {
+  margin-inline-end: initial !important;
+}
 /* ========================================================================================= */
 
 /* ========================================================================================= */
 /* Makes panels, menupopups, urlbar and searchbar rounded */
 /* Modify the rounding size here */
-:root{ --uc-menupopup-border-radius: 15px }
+:root {
+  --uc-menupopup-border-radius: 10px;
+}
 
 panel[type="autocomplete-richlistbox"],
 menupopup,
-.panel-arrowcontent{
+.panel-arrowcontent {
   -moz-appearance: none !important;
   border-radius: var(--uc-menupopup-border-radius) !important;
   overflow: -moz-hidden-unscrollable !important;
@@ -194,91 +117,110 @@ menupopup,
 
 /* The rounding is also applied to searchbar and urlbar to look consistent */
 searchbar#searchbar,
-#urlbar-background{
-  border-radius: var(--uc-menupopup-border-radius) !important
+#urlbar-background {
+  border-radius: var(--uc-menupopup-border-radius) !important;
 }
 
 /* Reposition the panel-arrow  */
-panel[type="arrow"]{ margin-inline-end: calc(-10px - var(--uc-menupopup-border-radius)) !important; }
-.panel-arrow{ margin-inline: var(--uc-menupopup-border-radius) !important; }
+panel[type="arrow"] {
+  margin-inline-end: calc(-10px - var(--uc-menupopup-border-radius)) !important;
+}
+.panel-arrow {
+  margin-inline: var(--uc-menupopup-border-radius) !important;
+}
 /* ========================================================================================= */
 
 /* ========================================================================================= */
 /* Page action-buttons "slide in" when cursor is on top of them and don't reserve space when not used */
 
-#page-action-buttons > *[class^=urlbar-icon]{
+#page-action-buttons > *[class^="urlbar-icon"] {
   margin-inline-end: -26px;
   opacity: 0;
   transition: margin-inline-end 100ms linear, opacity 200ms linear;
 }
-:root[uidensity="compact"] #page-action-buttons > *[class^=urlbar-icon]{ margin-inline-end: -22px; }
-#page-action-buttons:hover > *[class^=urlbar-icon],
-#page-action-buttons > *[class^=urlbar-icon][open],
-#page-action-buttons > *[class^=urlbar-icon][open] ~ *[class^=urlbar-icon]{
+:root[uidensity="compact"] #page-action-buttons > *[class^="urlbar-icon"] {
+  margin-inline-end: -22px;
+}
+#page-action-buttons:hover > *[class^="urlbar-icon"],
+#page-action-buttons > *[class^="urlbar-icon"][open],
+#page-action-buttons > *[class^="urlbar-icon"][open] ~ *[class^="urlbar-icon"] {
   opacity: 1;
   margin-inline-end: 0px !important;
 }
 /* ========================================================================================= */
 
-
 /* ========================================================================================= */
 /* Makes the contents of the overflow menu appear in a three column grid */
 /* Hides button labels */
 
-#widget-overflow-mainView{ min-width: 80px !important; }
+#widget-overflow-mainView {
+  min-width: 80px !important;
+}
 
-#widget-overflow-fixed-list{
+#widget-overflow-fixed-list {
   display: grid;
   grid-template-areas: "s s s" "a a a";
   grid-auto-columns: auto;
 }
 
-#widget-overflow-mainView[visible] #widget-overflow-fixed-list { max-width: 110px }
-#widget-overflow-mainView ~ panelview[visible]{ max-width: unset !important; } 
+#widget-overflow-mainView[visible] #widget-overflow-fixed-list {
+  max-width: 110px;
+}
+#widget-overflow-mainView ~ panelview[visible] {
+  max-width: unset !important;
+}
 
-#widget-overflow-fixed-list > *{ padding-block: 8px !important; }
-#widget-overflow-fixed-list > #search-container{ grid-area: s }
+#widget-overflow-fixed-list > * {
+  padding-block: 8px !important;
+}
+#widget-overflow-fixed-list > #search-container {
+  grid-area: s;
+}
 
 #widget-overflow-mainView #widget-overflow-fixed-list .subviewbutton-nav::after,
-#widget-overflow-mainView #widget-overflow-fixed-list .toolbarbutton-text{ display: none }
+#widget-overflow-mainView #widget-overflow-fixed-list .toolbarbutton-text {
+  display: none;
+}
 /* ========================================================================================= */
-
 
 /* ========================================================================================= */
 /* Always show tab close button on hover and never otherwise */
-.tabbrowser-tab .tab-close-button{
-  display:none;
+.tabbrowser-tab .tab-close-button {
+  display: none;
 }
-.tabbrowser-tab:not([pinned]):hover .tab-close-button{
-  display:-moz-box !important;
+.tabbrowser-tab:not([pinned]):hover .tab-close-button {
+  display: -moz-box !important;
 }
 
 /* Makes the tab audio indicator show as overlay in all tabs, not just pinned ones */
 
 .tab-icon-image,
-.tab-throbber{ opacity: 1 !important; }
-
-.tab-icon-overlay:not([crashed]){
-    top: -5.5px;
-    inset-inline-end: -6px;
-    z-index: 1;
-    padding: 2px;
-    opacity: 1 !important;
-    stroke: var(--tab-icon-overlay-stroke, black) !important;
+.tab-throbber {
+  opacity: 1 !important;
 }
-.tab-icon-overlay:not([crashed]):hover{
+
+.tab-icon-overlay:not([crashed]) {
+  top: -5.5px;
+  inset-inline-end: -6px;
+  z-index: 1;
+  padding: 2px;
+  opacity: 1 !important;
+  stroke: var(--tab-icon-overlay-stroke, black) !important;
+}
+.tab-icon-overlay:not([crashed]):hover {
   background-color: var(--tab-icon-overlay-stroke, black) !important;
   border-radius: 10px !important;
 }
 /* ========================================================================================= */
 
-
 /* ========================================================================================= */
 /* Makes menubar appear as overlay in the top left corner */
 /* Dummy variable to support both versions 89-90 */
-:root{ --tab-block-margin: var(--proton-tab-block-margin) }
+:root {
+  --tab-block-margin: var(--proton-tab-block-margin);
+}
 
-#toolbar-menubar{
+#toolbar-menubar {
   position: fixed;
   display: flex;
   top: 0;
@@ -287,62 +229,94 @@ panel[type="arrow"]{ margin-inline-end: calc(-10px - var(--uc-menupopup-border-r
   z-index: 10;
 }
 
-#toolbar-menubar[autohide="true"][inactive="true"]{ height: 0px !important; }
+#toolbar-menubar[autohide="true"][inactive="true"] {
+  height: 0px !important;
+}
 
-:root[tabsintitlebar][sizemode="maximized"] #toolbar-menubar{ top: 8px; }
+:root[tabsintitlebar][sizemode="maximized"] #toolbar-menubar {
+  top: 8px;
+}
 
-#toolbar-menubar > spacer{ flex-grow: 1 }
-#toolbar-menubar[inactive] > .titlebar-buttonbox-container{ display: none }
+#toolbar-menubar > spacer {
+  flex-grow: 1;
+}
+#toolbar-menubar[inactive] > .titlebar-buttonbox-container {
+  display: none;
+}
 
-#main-menubar{
-  height: calc(var(--tab-min-height) +  2 * var(--tab-block-margin,0px));
+#main-menubar {
+  height: calc(var(--tab-min-height) + 2 * var(--tab-block-margin, 0px));
   background-color: var(--arrowpanel-background);
   color: var(--arrowpanel-color);
 }
 
-#menubar-items{ -moz-box-orient: horizontal !important; }
-#menubar-items::after{
+#menubar-items {
+  -moz-box-orient: horizontal !important;
+}
+#menubar-items::after {
   content: "";
   display: -moz-box;
   width: 30px;
-  height: calc(var(--tab-min-height) +  2 * var(--tab-block-margin,0px));
-  background-image: linear-gradient(to right, var(--arrowpanel-background) 30%, transparent);
+  height: calc(var(--tab-min-height) + 2 * var(--tab-block-margin, 0px));
+  background-image: linear-gradient(
+    to right,
+    var(--arrowpanel-background) 30%,
+    transparent
+  );
 }
 
-@supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled"){
-  #toolbar-menubar[autohide="true"]:not([inactive]) > .titlebar-buttonbox-container{ display: none }  
+@supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled") {
+  #toolbar-menubar[autohide="true"]:not([inactive])
+    > .titlebar-buttonbox-container {
+    display: none;
+  }
 }
 /* ========================================================================================= */
-
 
 /* ========================================================================================= */
 /* Hide the normal loading indicator (just show tab-icon instead) and make the top tab-line bounce left-to-right */
-@keyframes tabline-anim{from{background-position-x: left}to{background-position-x: right}}
-.tabbrowser-tab[busy] > stack >  .tab-background::before,
-.tab-background[selected]::before{
+@keyframes tabline-anim {
+  from {
+    background-position-x: left;
+  }
+  to {
+    background-position-x: right;
+  }
+}
+.tabbrowser-tab[busy] > stack > .tab-background::before,
+.tab-background[selected]::before {
   content: "";
   display: -moz-box;
   height: 2px;
   opacity: 0;
-  background-image: linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.2));
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
+  );
   background-repeat: no-repeat;
   background-size: 100%;
   transition: background-size 80ms linear;
 }
 
-.tabbrowser-tab[busy] > stack > .tab-background::before{
+.tabbrowser-tab[busy] > stack > .tab-background::before {
   background-size: 10%;
-  background-image: linear-gradient(var(--tab-line-color),var(--tab-line-color));
+  background-image: linear-gradient(
+    var(--tab-line-color),
+    var(--tab-line-color)
+  );
   opacity: 0.7;
   animation: tabline-anim 400ms alternate infinite ease-in-out;
 }
 
-.tabbrowser-tab .tab-throbber{ display: none }
-.tabbrowser-tab .tab-icon-image{ display: -moz-box !important; }
+.tabbrowser-tab .tab-throbber {
+  display: none;
+}
+.tabbrowser-tab .tab-icon-image {
+  display: -moz-box !important;
+}
 
 /* All deselected tabs should have text with lower visibility */
 .tab-label:not([selected="true"]) {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 /* ========================================================================================= */
-

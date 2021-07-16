@@ -4,8 +4,9 @@ set icons
 set nohidden
 set ifs "\n"
 set filesep "\n"
-set previewer pv
-set cleaner preview-image
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
+set ratios 1:2:3
 set ignorecase true
 
 # Custom Functions
