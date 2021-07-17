@@ -9,13 +9,17 @@ zle_highlight=('paste:none')
 # beeping is annoying
 unsetopt BEEP
 
+# Write a duplicate event to the history file
+setopt HIST_SAVE_NO_DUPS       
 
 # completions
 autoload -Uz compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' rehash true
 # zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complist
-# compinit
+compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 autoload -U up-line-or-beginning-search
@@ -44,7 +48,7 @@ zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 
 # Key-bindings
 bindkey -s '^o' 'ranger^M'
-bindkey -s '^f' 'zi^M'
+bindkey -s '^f' "fzf --preview 'bat {}'^M"
 # bindkey -s '^s' 'ncdu^M'
 # bindkey -s '^n' 'nvim $(fzf)^M'
 # bindkey -s '^v' 'nvim\n'
