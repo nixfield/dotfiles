@@ -1,5 +1,8 @@
 #!/bin/sh
 
+HISTSIZE=1000000
+SAVEHIST=1000000
+
 # some useful options (man zshoptions)
 setopt autocd extendedglob nomatch menucomplete
 setopt interactive_comments
@@ -8,6 +11,7 @@ zle_highlight=('paste:none')
 
 # beeping is annoying
 unsetopt BEEP
+unsetopt PROMPT_SP
 
 # Write a duplicate event to the history file
 setopt HIST_SAVE_NO_DUPS       
@@ -34,7 +38,7 @@ autoload -Uz colors && colors
 source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
-zsh_add_file "zsh-exports"
+# zsh_add_file "zsh-exports"
 zsh_add_file "zsh-vim-mode"
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-prompt"
@@ -73,3 +77,9 @@ compinit
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+source /home/niko/.config/broot/launcher/bash/br
+
+# eval "$(fnm env)"
+eval "$(zoxide init zsh)"
+# eval "`pip completion --zsh`"
