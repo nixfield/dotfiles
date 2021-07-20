@@ -1,11 +1,10 @@
+**/.zcompdump
+**/watch_later/*
+**/__pycache__/*
+**/playlists/*
+**/cookie/*
 
-pulse/.config/pulse/cookie
-mpv/.config/mpv/playlists
-mpv/.config/mpv/watch_later
-
-zsh/.config/zsh/.zcompdump
 local/.local/bin/nvr
 local/.local/bin/pytube
 local/.local/bin/spotdl
 local/.local/bin/tqdm
-zsh/.config/zsh/.zcompdump
