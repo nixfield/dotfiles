@@ -273,50 +273,85 @@ panel[type="arrow"] {
 }
 /* ========================================================================================= */
 
-/* ========================================================================================= */
-/* Hide the normal loading indicator (just show tab-icon instead) and make the top tab-line bounce left-to-right */
-@keyframes tabline-anim {
-  from {
-    background-position-x: left;
-  }
-  to {
-    background-position-x: right;
-  }
-}
-.tabbrowser-tab[busy] > stack > .tab-background::before,
-.tab-background[selected]::before {
-  content: "";
-  display: -moz-box;
-  height: 2px;
-  opacity: 0;
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.2)
-  );
-  background-repeat: no-repeat;
-  background-size: 100%;
-  transition: background-size 80ms linear;
+/* S E T T I N G S */
+
+/* H I D I N G   E L E M E N T S */
+/* Comment or uncomment depending of what elements you want to hide */
+
+/* Back button */
+/* #back-button {display: none !important} */
+
+/* Hide back button only when disabled */
+#back-button[disabled="true"] {
+  display: none !important;
 }
 
-.tabbrowser-tab[busy] > stack > .tab-background::before {
-  background-size: 10%;
-  background-image: linear-gradient(
-    var(--tab-line-color),
-    var(--tab-line-color)
-  );
-  opacity: 0.7;
-  animation: tabline-anim 400ms alternate infinite ease-in-out;
+/* Forward button */
+/* #forward-button {display: none !important} */
+
+/* Hide forward button only when disabled */
+#forward-button[disabled="true"] {
+  display: none !important;
 }
 
-.tabbrowser-tab .tab-throbber {
-  display: none;
-}
-.tabbrowser-tab .tab-icon-image {
-  display: -moz-box !important;
+/* "Shield" icon */
+#tracking-protection-icon-container[disabled="true"] {
+  display: none !important;
 }
 
-/* All deselected tabs should have text with lower visibility */
-.tab-label:not([selected="true"]) {
-  opacity: 0.6;
+/* Site information button */
+#identity-box[disabled="true"] {
+  display: none !important;
 }
-/* ========================================================================================= */
+
+/* This is the "Search with" indicator on the urlbar */
+/* #urlbar-search-mode-indicator[disabled="true"] { */
+/*   display: none !important; */
+/* } */
+
+/* Zoom button */
+#urlbar-zoom-button[disabled="true"] {
+  display: none !important;
+}
+
+/* Page action (right three dash button) */
+/* #pageActionButton {display: none !important} */
+
+/* These are the buttons on the right of the urlbar */
+/* #page-action-buttons {display: none !important} */
+
+/* #urlbar-label-box {display: none !important} */
+
+/* This one is the hamburger menu! */
+/* CAUTION: if you hide this some popups may be bugged */
+/* #PanelUI-button {display: none !important} */
+
+/* Tab close button */
+/* .tab-close-button {display: none !important} */
+
+#nav-bar {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* A U T O  H I D E */
+/* Uncomment relavent Sections */
+
+/* Configuration 1 - START */
+/* Hide Unless focused with CMD/Ctrl - L or In a New Tab */
+/* Adapted from https://superuser.com/a/1497982/1189696 */
+
+/* #navigator-toolbox:not(:hover) { */
+/*   height: 4px !important; /* Adjusts gap to hover over */ */
+/*   min-height: 0px !important; */
+/*   overflow: hidden !important; */
+/* } */
+/*  */
+/* #navigator-toolbox:focus, */
+/* #navigator-toolbox:focus-within, */
+/* #navigator-toolbox:active, */
+/* #urlbar[focused="true"] { */
+/*   height: auto !important; */
+/*   overflow: visible !important; */
+/* } */
+/* Configuration 1 - END */
