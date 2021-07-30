@@ -133,17 +133,19 @@ panel[type="arrow"] {
 /* ========================================================================================= */
 /* Page action-buttons "slide in" when cursor is on top of them and don't reserve space when not used */
 
-#page-action-buttons > *[class^="urlbar-icon"] {
-  margin-inline-end: -26px;
+#page-action-buttons {
+  padding-inline-start: 8px;
+}
+
+.urlbar-page-action {
+  margin-inline-end: calc(-16px - 2 * var(--urlbar-icon-padding));
   opacity: 0;
   transition: margin-inline-end 100ms linear, opacity 200ms linear;
 }
-:root[uidensity="compact"] #page-action-buttons > *[class^="urlbar-icon"] {
-  margin-inline-end: -22px;
-}
-#page-action-buttons:hover > *[class^="urlbar-icon"],
-#page-action-buttons > *[class^="urlbar-icon"][open],
-#page-action-buttons > *[class^="urlbar-icon"][open] ~ *[class^="urlbar-icon"] {
+
+#page-action-buttons:hover > .urlbar-page-action,
+.urlbar-page-action[open],
+.urlbar-page-action[open] ~ .urlbar-page-action {
   opacity: 1;
   margin-inline-end: 0px !important;
 }
@@ -295,14 +297,15 @@ panel[type="arrow"] {
 }
 
 /* "Shield" icon */
-#tracking-protection-icon-container[disabled="true"] {
+#tracking-protection-icon-container {
   display: none !important;
 }
 
-/* Site information button */
-#identity-box[disabled="true"] {
-  display: none !important;
-}
+/* /* Site information button */
+*/
+/* #identity-box { */
+/*   display: none !important; */
+/* } */
 
 /* This is the "Search with" indicator on the urlbar */
 /* #urlbar-search-mode-indicator[disabled="true"] { */
@@ -310,7 +313,7 @@ panel[type="arrow"] {
 /* } */
 
 /* Zoom button */
-#urlbar-zoom-button[disabled="true"] {
+#urlbar-zoom-button {
   display: none !important;
 }
 
@@ -341,17 +344,21 @@ panel[type="arrow"] {
 /* Hide Unless focused with CMD/Ctrl - L or In a New Tab */
 /* Adapted from https://superuser.com/a/1497982/1189696 */
 
-/* #navigator-toolbox:not(:hover) { */
-/*   height: 4px !important; /* Adjusts gap to hover over */ */
-/*   min-height: 0px !important; */
-/*   overflow: hidden !important; */
-/* } */
-/*  */
-/* #navigator-toolbox:focus, */
-/* #navigator-toolbox:focus-within, */
-/* #navigator-toolbox:active, */
-/* #urlbar[focused="true"] { */
-/*   height: auto !important; */
-/*   overflow: visible !important; */
-/* } */
+/* Adjusts gap to hover over */
+/*
+#navigator-toolbox:not(:hover) {
+  height: 4px !important; 
+  min-height: 0px !important;
+  overflow: hidden !important;
+}
+
+#navigator-toolbox:focus,
+#navigator-toolbox:focus-within,
+#navigator-toolbox:active,
+#urlbar[focused="true"] {
+  height: auto !important;
+  overflow: visible !important;
+}
+*/
+
 /* Configuration 1 - END */
