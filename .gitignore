@@ -9,3 +9,5 @@ local/.local/bin/nvr
 local/.local/bin/pytube
 local/.local/bin/spotdl
 local/.local/bin/tqdm
+
+lvim/.config/lvim/plugin/packer_compiled.lua
