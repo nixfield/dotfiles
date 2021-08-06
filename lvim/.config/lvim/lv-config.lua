@@ -1,7 +1,7 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- general
-lvim.format_on_save = true
+lvim.format_on_save = false
 lvim.lint_on_save = true
 lvim.colorscheme = "spacegray"
 
@@ -49,13 +49,29 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- end
 
 -- Additional Plugins
--- lvim.plugins = {
---     {"folke/tokyonight.nvim"}, {
---         "ray-x/lsp_signature.nvim",
---         config = function() require"lsp_signature".on_attach() end,
---         event = "InsertEnter"
---     }
--- }
+lvim.plugins = {
+  {
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({ "*" }, {
+				RGB = true, -- #RGB hex codes
+				RRGGBB = true, -- #RRGGBB hex codes
+				RRGGBBAA = true, -- #RRGGBBAA hex codes
+				rgb_fn = true, -- CSS rgb() and rgba() functions
+				hsl_fn = true, -- CSS hsl() and hsla() functions
+				css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+				css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+			})
+		end,
+	},
+	{ "vimwiki/vimwiki"},
+	{
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		ft = "markdown",
+	},
+
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
@@ -64,10 +80,18 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- Additional Leader bindings for WhichKey
 
+-- general
 vim.opt.wrap = true
 vim.opt.relativenumber = true
 lvim.transparent_window = true
-lvim.keys.normal_mode = {
-	{ "j", "gj" },
-	{ "k", "gk" },
+
+
+-- keymappings
+vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true, silent = true })
+
+-- vim wiki config
+vim.g.vimwiki_list = {
+	{ path = "/$HOME/Vimwiki", syntax = "markdown", ext = ".md" },
+	{ path = "/$HOME/Vimwiki/project/akb", syntax = "markdown", ext = ".md" },
 }
