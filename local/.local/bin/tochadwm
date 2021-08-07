@@ -1,11 +1,12 @@
 #!/bin/sh
 # switch to chadwm, no need to login again
 
-pkill sxhkd;sxhkd -c ~/.config/sxhkd/chad_sxhkdrc &
+pkill sxhkd;sxhkd -c ~/.config/sxhkd/sxhkdrc &
 rm -f ~/.config/dunst/dunstrc
 cp -f ~/.config/dunst/chaddunstrc ~/.config/dunst/dunstrc
 pkill dunst
-xrdb .Xresources
+dunst &
+xrdb ~/.Xresources
 cd /home/niko/.local/src/chadwm/chadwm; sudo make clean install
 killall -q dwmblocks;setsid ~/.dwm/bar &
 kill -HUP $(pgrep -u $USER "\bdwm$")

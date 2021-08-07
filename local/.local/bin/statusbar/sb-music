@@ -2,6 +2,17 @@
 
 filter() { mpc --format '[%title%|%file%]' | sed "/^volume:/d;s/\\[paused\\].*//g;/\\[playing\\].*/d" | paste -sd ' ' -; }
 
+if mpc status | awk 'NR==2' | grep 'playing' > /dev/null 
+then
+  echo "$(mpc status | filter)"
+elif playerctl -p spotify status | grep Playing > /dev/null
+then
+  echo "$(playerctl -p spotify metadata -f '{{title}}') "
+else
+  # show mpc pause song
+  echo "$(mpc status | filter)"
+fi
+
 pidof -x sb-mpdup >/dev/null 2>&1 || sb-mpdup >/dev/null 2>&1 &
 
 case $BLOCK_BUTTON in

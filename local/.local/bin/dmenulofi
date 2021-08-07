@@ -41,6 +41,6 @@ else
 		Local) printf -v local_song '%s\n' "$(ls $HOME/Music/)" &&
 		       chosen_song="$(dmenu -i -p "Local song" -l 20 <<< "$local_song")" &&
 		       mpv --no-video "$HOME/Music/$chosen_song" ;;
-		*) notify-send "Nothing played" && exit ;;
+		*) exit ;;
 	esac
 fi

@@ -9,6 +9,9 @@
 #
 # If there is already a running instance, user will be prompted to end it.
 
+# menu="dmenu -i -p"
+menu="rofi -dmenu -i -p"
+
 updateicon() { \
 	echo "$1" > /tmp/recordingicon
 	pkill -RTMIN+9 "${STATUSBAR:-dwmblocks}"
@@ -109,7 +112,7 @@ audio() { \
 	}
 
 askrecording() { \
-	choice=$(printf "screencast\\nscreenwindow\\nvideo\\nvideo selected\\naudio\\nwebcam\\nwebcam (hi-def)" | dmenu -i -p "Select recording style:")
+	choice=$(printf "screencast\\nscreenwindow\\nvideo\\nvideo selected\\naudio\\nwebcam\\nwebcam (hi-def)" | $menu "Select recording style:")
 	case "$choice" in
 		screencast) screencast;;
 		screenwindow) screenwindow;;
@@ -122,7 +125,7 @@ askrecording() { \
 	}
 
 asktoend() { \
-	response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?") &&
+	response=$(printf "No\\nYes" | $menu "Recording still active. End recording?") &&
 	[ "$response" = "Yes" ] &&  killrecording
 	}
 

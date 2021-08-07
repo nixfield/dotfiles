@@ -121,7 +121,7 @@ alt + XF86AudioMute
     [ $mo_mute = "false" ] && dunstify "  Monitor Input UNMUTED" -t 1000 -r 1
 
 {XF86AudioStop,XF86AudioPrev,XF86AudioNext,XF86AudioPlay}
-    playerctl {stop, previous, next, play-pause}
+    playerctl -p spotify {stop, previous, next, play-pause}
 
 # brightness
 {XF86MonBrightnessDown, XF86MonBrightnessUp}
@@ -208,10 +208,10 @@ super + shift + {q,w,r}
     {YTFZF_EXTMENU_LEN=160 ytfzf -Dl, firefox, thunar}
 
 super + {_,shift} + d
-    {j4-dmenu-desktop, dmenu_run}
+    {rofi -show drun, dmenu_run}
 
-super + shift + {grave,x,c,b,n,m}
-    {dmenuunicode,dmenukill, dmenuspell,dmenumarks ~/Vimwiki/bookmark.md,st -e newsboat; pkill -RTMIN+6 dwmblocks,st -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook}
+super + shift + {grave,c,b,n,m}
+    {dmenuunicode, dmenuspell,dmenumarks ~/Vimwiki/bookmark.md,st -e newsboat; pkill -RTMIN+6 dwmblocks,st -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook}
 
 # polybar systray
 super + {_,shift} + z
