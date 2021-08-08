@@ -1,8 +1,8 @@
 #!/bin/sh
 # switch to chadwm, no need to login again
 
-cd $HOME/.local/src/chadwm/chadwm; sudo make clean install
-killall -q dwmblocks;setsid ~/.dwm/bar &
+cd $HOME/.local/src/chadwm; sudo make clean install
+killall -q dwmblocks;setsid chadwmbar &
 kill -HUP $(pgrep -u $USER "\bdwm$")
 rm -f ~/.config/dunst/dunstrc
 cp -f ~/.config/dunst/chaddunstrc ~/.config/dunst/dunstrc

@@ -1,0 +1,126 @@
+#!/bin/bash
+
+interval=0
+
+cpu() {
+  cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
+
+  printf "^c#3b414d^ ^b#A3BE8C^ CPU"
+  printf "^c#abb2bf^ ^b#414753^ $cpu_val"
+}
+
+update_icon() {
+  printf "^c#94af7d^ "
+}
+
+# only for void users!
+# xbps_updates() {
+#   updates=$(xbps-install -un | cut -d' ' -f2 | sort | uniq -c | xargs)
+# 
+#   if [ -z "$updates" ]; then
+#     printf "^c#94af7d^ Fully Updated"
+#   else
+#     printf "^c#94af7d^ $updates""s"
+#   fi
+# }
+
+# only for arch user! it requires pacman-contrib package
+pacman_updates() {
+  updates=$(checkupdates | wc -l)
+
+  if [ -z "$updates" ]; then
+    printf "^c#94af7d^ Fully Updated"
+  else
+    printf "^c#94af7d^ $updates"
+  fi
+}
+
+# # battery
+# batt() {
+#   printf "^c#81A1C1^  "
+#   printf "^c#81A1C1^ $(acpi | sed "s/,//g" | awk '{if ($3 == "Discharging"){print $4; exit} else {print $4""}}' | tr -d "\n")"
+# }
+
+# brightness() {
+# 
+#   backlight() {
+#     backlight="$(xbacklight -get)"
+#     echo -e "$backlight"
+#   }
+# 
+#   printf "^c#BF616A^   "
+#   printf "^c#BF616A^%.0f\n" $(backlight)
+# }
+
+mem() {
+  printf "^c#7797b7^^b#2E3440^  "
+  printf "^c#7797b7^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
+}
+
+wlan() {
+  case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
+  up) printf "^c#3b414d^ ^b#7681c5^ 󰤨 ^d^%s" " ^c#828dd1^Connected" ;;
+  down) printf "^c#3b414d^ ^b#7681c5^ 󰤭 ^d^%s" " ^c#828dd1^Disconnected" ;;
+  esac
+}
+
+clock() {
+  printf "^c#2E3440^ ^b#828dd1^ "
+  printf "^c#2E3440^^b#6c77bb^ $(date '+%a, %I:%M %p') "
+}
+
+music() {
+if playerctl -p spotify status | grep Playing > /dev/null
+then
+  # show spotify play song
+  printf "^c#BF616A^   $(playerctl -p spotify metadata -f '{{title}}')"
+elif mpc status | awk 'NR==2' | grep 'playing' > /dev/null 
+then
+  # show mpc play song
+  printf "^c#BF616A^   $(mpc status |  mpc --format '[%title%|%file%]' | sed "/^volume:/d;s/\\[paused\\].*//g;/\\[playing\\].*/d" | paste -sd ' ' -; )"
+elif playerctl -p spotify status | grep Paused > /dev/null 
+then
+  # show spotify pause song
+  printf "^c#BF616A^   $(playerctl -p spotify metadata -f '{{title}}') "
+else
+  # show mpc pause song
+  printf "^c#BF616A^   $(mpc status |  mpc --format '[%title%|%file%]' | sed "/^volume:/d;s/\\[paused\\].*//g;/\\[playing\\].*/d" | paste -sd ' ' -; )"
+fi
+}
+
+volume() {
+
+  vol() {
+  [ $(pamixer --get-mute) = true ] && echo ﱝ && exit
+
+  vol="$(pamixer --get-volume)"
+
+  if [ "$vol" -gt "70" ]; then
+    icon=""
+  elif [ "$vol" -lt "30" ]; then
+    icon=""
+  else
+    icon="墳"
+  fi
+  echo -e "$icon $vol"
+  }
+  printf "^c#81A1C1^ $(vol)"
+}
+
+record() {
+  printf "^c#81A1C1^ $(cat /tmp/recordingicon 2>/dev/null) "
+}
+
+event() {
+  printf "^c#828dd1^ $(calcurse -n | sed 1d | sed -E "s_^ *\[(.*):(.*)\] ([^\t]*)\t?.*_[\1h \2m->\3]_")"
+}
+
+while true; do
+
+  # remove these 2 lines if u dont use void! or adjust the xbps-updates to get n.o of updates (according your distro ofc)
+  [ $interval == 0 ] || [ $(($interval % 3600)) == 0 ] && updates=$(pacman_updates)
+  interval=$((interval + 1))
+
+  # sleep 1 && xsetroot -name "$(update_icon) $updates $(batt) $(brightness) $(cpu) $(mem) $(wlan) $(clock)"
+  sleep 1 && xsetroot -name "$(record) $(event) $(music) $(update_icon) $updates $(volume) $(cpu) $(mem) $(wlan) $(clock) "
+done

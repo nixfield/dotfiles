@@ -2,7 +2,7 @@
 # switch to chadwm, no need to login again
 
 cd $HOME/.local/src/dwm; sudo make clean install
-killall -q bar;setsid dwmblocks &
+killall -q chadwmbar;setsid dwmblocks &
 dwmc quit 1
 setbg &
 pkill dunst
