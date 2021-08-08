@@ -1,8 +1,0 @@
-#!/bin/sh
-# switch to chadwm session, need to login again
-
-cd /home/niko/.local/src/chadwm/chadwm; sudo make clean install
-rm -f ~/.config/dunst/dunstrc
-cp -f ~/.config/dunst/chaddunstrc ~/.config/dunst/dunstrc
-
-killall -KILL -u niko

@@ -1,0 +1,11 @@
+#!/bin/sh
+# switch to chadwm, no need to login again
+
+cd $HOME/.local/src/dwm; sudo make clean install
+killall -q bar;setsid dwmblocks &
+dwmc quit 1
+setbg &
+pkill dunst
+dunst &
+cp -f $HOME/.config/gtk-3.0/settings.ini.dark $HOME/.config/gtk-3.0/settings.ini
+cp -f $HOME/.config/gtk-2.0/gtkrc-2.0.dark $HOME/.config/gtk-2.0/gtkrc-2.0

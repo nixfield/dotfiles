@@ -1,13 +1,14 @@
 #!/bin/sh
 # switch to chadwm, no need to login again
 
-pkill sxhkd;sxhkd -c ~/.config/sxhkd/sxhkdrc &
+cd $HOME/.local/src/chadwm/chadwm; sudo make clean install
+killall -q dwmblocks;setsid ~/.dwm/bar &
+kill -HUP $(pgrep -u $USER "\bdwm$")
 rm -f ~/.config/dunst/dunstrc
 cp -f ~/.config/dunst/chaddunstrc ~/.config/dunst/dunstrc
 pkill dunst
 dunst &
 xrdb ~/.Xresources
-cd /home/niko/.local/src/chadwm/chadwm; sudo make clean install
-killall -q dwmblocks;setsid ~/.dwm/bar &
-kill -HUP $(pgrep -u $USER "\bdwm$")
 feh --bg-fill ~/Pictures/wall/benord.png
+cp -f $HOME/.config/gtk-3.0/settings.ini.nord $HOME/.config/gtk-3.0/settings.ini
+cp -f $HOME/.config/gtk-2.0/gtkrc-2.0.nord $HOME/.config/gtk-2.0/gtkrc-2.0
