@@ -1,3 +1,3 @@
 #!/bin/sh
 
-killall bar;setsid ~/.dwm/bar &
+killall chadwmbar;setsid chadwmbar &

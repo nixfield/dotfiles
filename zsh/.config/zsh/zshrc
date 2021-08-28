@@ -64,6 +64,12 @@ bindkey "^k" up-line-or-beginning-search # Up
 bindkey "^j" down-line-or-beginning-search # Down
 bindkey -r "^u"
 bindkey -r "^d"
+bindkey '^X^m' accept-line-swallow
+zle -N accept-line-swallow acceptandswallow
+acceptandswallow() {
+    dwmswallow $WINDOWID
+    zle accept-line
+}
 
 # FZF 
 # TODO update for mac
@@ -83,3 +89,4 @@ source /home/niko/.config/broot/launcher/bash/br
 # eval "$(fnm env)"
 eval "$(zoxide init zsh)"
 # eval "`pip completion --zsh`"
+eval "$(thefuck --alias)"

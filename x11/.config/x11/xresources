@@ -89,7 +89,7 @@ Xft.lcdfilter:	lcddefault
 /* st.alpha: 1.0  */
 
 ! window border inner
-st.borderpx: 5
+/* st.borderpx: 5 */
 
 ! Base16 OneDark
 ! Scheme: Lalit Magant (http://github.com/tilal6991)
@@ -154,39 +154,79 @@ st.borderpx: 5
 
 ! -- colors --   282e3a!
 
-#define nord0 #282E3A  
- 
-#define nord1 #282E3A
-#define nord2 #434C5E
-#define nord3 #4C566A
-#define nord4 #D8DEE9
-#define nord5 #E5E9F0
-#define nord6 #ECEFF4
-#define nord7 #8FBCBB
-#define nord8 #88C0D0
-#define nord9 #81A1C1
-#define nord10 #5E81AC
-#define nord11 #BF616A
-#define nord12 #D08770
-#define nord13 #EBCB8B
-#define nord14 #A3BE8C
-#define nord15 #B48EAD
+/* #define nord0 #282E3A   */
+/*   */
+/* #define nord1 #434C5E */
+/* #define nord2 #434C5E */
+/* #define nord3 #4C566A */
+/* #define nord4 #D8DEE9 */
+/* #define nord5 #E5E9F0 */
+/* #define nord6 #ECEFF4 */
+/* #define nord7 #8FBCBB */
+/* #define nord8 #88C0D0 */
+/* #define nord9 #81A1C1 */
+/* #define nord10 #5E81AC */
+/* #define nord11 #BF616A */
+/* #define nord12 #D08770 */
+/* #define nord13 #EBCB8B */
+/* #define nord14 #A3BE8C */
+/* #define nord15 #B48EAD */
+/*  */
+/* *.foreground:   nord4 */
+/* *.background:   nord0 */
+/* *.color0: nord1 */
+/* *.color1: nord11 */
+/* *.color2: nord14 */
+/* *.color3: nord13 */
+/* *.color4: nord9 */
+/* *.color5: nord15 */
+/* *.color6: nord8 */
+/* *.color7: nord5 */
+/* *.color8: nord3 */
+/* *.color9: nord11 */
+/* *.color10: nord14 */
+/* *.color11: nord13 */
+/* *.color12: nord9 */
+/* *.color13: nord15 */
+/* *.color14: nord7 */
+/* *.color15: nord6 */
+/* *background:	#1A2026 */
+/* *foreground:	#FFFFFF */
+/* *cursorColor:	#FFFFFF */
+/* *color0:	#1A2026 */
+/* *color1:	#FB6396 */
+/* *color2:	#94CF95 */
+/* *color3:	#F692B2 */
+/* *color4:	#6EC1D6 */
+/* *color5:	#CD84C8 */
+/* *color6:	#7FE4D2 */
+/* *color7:	#FFFFFF */
+/* *color8:	#526170 */
+/* *color9:	#F92D72 */
+/* *color10:	#6CCB6E */
+/* *color11:	#F26190 */
+/* *color12:	#4CB9D6 */
+/* *color13:	#C269BC */
+/* *color14:	#58D6BF */
+/* *color15:	#F4F5F2 */
+!!! colors
 
-*.foreground:   nord4
-*.background:   nord0
-*.color0: nord1
-*.color1: nord11
-*.color2: nord14
-*.color3: nord13
-*.color4: nord9
-*.color5: nord15
-*.color6: nord8
-*.color7: nord5
-*.color8: nord3
-*.color9: nord11
-*.color10: nord14
-*.color11: nord13
-*.color12: nord9
-*.color13: nord15
-*.color14: nord7
-*.color15: nord6
+!colors
+*.foreground: #f0f0f0
+*.background: #0f0f0f
+*.color0:     #151515  
+*.color1:     #ac8a8c
+*.color2:     #8aac8b
+*.color3:     #aca98a
+*.color6:     #8f8aac
+*.color5:     #ac8aac
+*.color4:     #8aabac
+*.color7:     #e7e7e7
+*.color8:     #4c4c4c
+*.color9:     #c49ea0
+*.color10:    #9ec49f
+*.color11:    #c4c19e
+*.color14:    #a39ec4
+*.color13:    #c49ec4
+*.color12:    #9ec3c4
+*.color15:    #f5f5f5

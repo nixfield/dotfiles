@@ -2,18 +2,24 @@
 
 filter() { mpc --format '[%title%|%file%]' | sed "/^volume:/d;s/\\[paused\\].*//g;/\\[playing\\].*/d" | paste -sd ' ' -; }
 
-if mpc status | awk 'NR==2' | grep 'playing' > /dev/null 
-then
-  echo "$(mpc status | filter)"
-elif playerctl -p spotify status | grep Playing > /dev/null
-then
-  echo "$(playerctl -p spotify metadata -f '{{title}}') "
-else
-  # show mpc pause song
-  echo "$(mpc status | filter)"
-fi
-
 pidof -x sb-mpdup >/dev/null 2>&1 || sb-mpdup >/dev/null 2>&1 &
+
+# if playerctl -p spotify status | grep Playing > /dev/null
+# then
+#   # show spotify play song
+#   echo "  $(playerctl -p spotify metadata -f '{{title}}')"
+# elif mpc status | awk 'NR==2' | grep 'playing' > /dev/null 
+# then
+#   # show mpc play song
+#   echo "  $(mpc status |  mpc --format '[%title%|%file%]' | sed "/^volume:/d;s/\\[paused\\].*//g;/\\[playing\\].*/d" | paste -sd ' ' -; )"
+# elif playerctl -p spotify status | grep Paused > /dev/null 
+# then
+#   # show spotify pause song
+#   echo "  $(playerctl -p spotify metadata -f '{{title}}') "
+# else
+#   # show mpc pause song
+#   echo "  $(mpc status |  mpc --format '[%title%|%file%]' | sed "/^volume:/d;s/\\[paused\\].*//g;/\\[playing\\].*/d" | paste -sd ' ' -; )"
+# fi
 
 case $BLOCK_BUTTON in
 	1) mpc status | filter ; setsid -f "$TERMINAL" -e ncmpcpp ;;  # right click, pause/unpause

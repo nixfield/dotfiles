@@ -12,3 +12,4 @@ xrdb ~/.Xresources
 feh --bg-fill ~/Pictures/wall/benord.png
 cp -f $HOME/.config/gtk-3.0/settings.ini.nord $HOME/.config/gtk-3.0/settings.ini
 cp -f $HOME/.config/gtk-2.0/gtkrc-2.0.nord $HOME/.config/gtk-2.0/gtkrc-2.0
+rm $HOME/.xprofile;ln -s $HOME/.config/x11/xprofile $HOME/.xprofile

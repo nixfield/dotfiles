@@ -109,4 +109,5 @@ alias \
     pac="nvim ~/Documents/localpkglist.txt" \
     za="zathura" \
     lf="lfrun" \
+    cfa="nvim ~/.config/zsh/zsh-aliases" \
 
