@@ -204,6 +204,9 @@ super + Return
 super + {q,w,r,b}
     {dmenulofi, dmenusearch, st -e lfrun, feh --bg-fill --randomize ~/Pictures/wall/*}
 
+super + control + w
+    firefox --private-window
+
 super + shift + {q,w,r}
     {YTFZF_EXTMENU_LEN=160 ytfzf -Dl, firefox, thunar}
 

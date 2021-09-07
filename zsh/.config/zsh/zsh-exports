@@ -7,7 +7,7 @@ export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
 export PATH="$PATH:$HOME/.local/bin/statusbar"
 
 # Default programs:
-export EDITOR="nvim"
+export EDITOR="lvim"
 export TERMINAL="st"
 export BROWSER="firefox"
 
@@ -26,6 +26,7 @@ export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
+export NPM_CONFIG_PREFIX=~/.npm-global
 # export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 # export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
 # export WEECHAT_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/weechat"

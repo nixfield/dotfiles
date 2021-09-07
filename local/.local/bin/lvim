@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-/home/niko/.config/lvim}"
+export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-/home/niko/.local/share/lunarvim}"
+
+exec nvim -u "$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "$@"
