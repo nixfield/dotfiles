@@ -455,3 +455,11 @@ findbar{
   margin-right: 16px;
   border-right: 1px solid var(--chrome-content-separator-color);
 }
+
+/* remove "padding" left and right from tabs */
+.titlebar-spacer { display: none !important; }
+
+/* remove gap after pinned tabs */
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
+    > #tabbrowser-arrowscrollbox
+    > .tabbrowser-tab[first-visible-unpinned-tab] { margin-inline-start: 0 !important; }

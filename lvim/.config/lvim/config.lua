@@ -3,180 +3,51 @@
 -- general
 lvim.format_on_save = false
 lvim.lint_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "dark_catppuccino"
+vim.opt.scrolloff = 999 -- keep cursor centered on the screen while scrolling
+vim.opt.wrap = true
+vim.opt.relativenumber = true
+vim.opt.cmdheight = 1
 
--- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
--- add your own keymapping
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = ""
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
-
--- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
--- lvim.builtin.telescope.on_config_done = function()
---   local actions = require "telescope.actions"
---   -- for input mode
---   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
---   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
---   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
---   -- for normal mode
---   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
---   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
+-- uncomment this line and change fancy statusline to true if want change colorscheme automatically based on time
+-- local _time = os.date "*t"
+-- if _time.hour >= 17 and _time.hour <= 24 then
+--   lvim.colorscheme = "onedarker"
 -- end
 
--- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
--- }
+-- if _time.hour >= 0 and _time.hour < 17 then
+--   lvim.colorscheme = "dark_catppuccino"
+-- end
 
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+-- lvim stuff
+lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
--- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {}
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
--- generic LSP settings
--- you can set a custom on_attach function that will be used for all the language servers
--- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
--- you can overwrite the null_ls setup table (useful for setting the root_dir function)
--- lvim.lsp.null_ls.setup = {
---   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
--- }
--- or if you need something more advanced
--- lvim.lsp.null_ls.setup.root_dir = function(fname)
---   if vim.bo.filetype == "javascript" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
---       or require("lspconfig/util").path.dirname(fname)
---   elseif vim.bo.filetype == "php" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
---   else
---     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
---   end
--- end
+lvim.builtin.fancy_statusline = { active = true } -- change this to enable/disable fancy statusline
+if lvim.builtin.fancy_statusline.active then
+  require("user.lualine").config()
+end
 
--- set a formatter if you want to override the default lsp one (if it exists)
--- lvim.lang.python.formatters = {
---   {
---     exe = "black",
---     args = {}
---   }
--- }
--- set an additional linter
--- lvim.lang.python.linters = {
---   {
---     exe = "flake8",
---     args = {}
---   }
--- }
+require("user.plugins").config()
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
-
--- Additional Plugins
-lvim.plugins = {
-  {
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup({ "*" }, {
-				RGB = true, -- #RGB hex codes
-				RRGGBB = true, -- #RRGGBB hex codes
-				RRGGBBAA = true, -- #RRGGBBAA hex codes
-				rgb_fn = true, -- CSS rgb() and rgba() functions
-				hsl_fn = true, -- CSS hsl() and hsla() functions
-				css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-				css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-			})
-		end,
-	},
-	{ "vimwiki/vimwiki"},
-	{
-		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		ft = "markdown",
-	},
-  {
-    "lukas-reineke/indent-blankline.nvim",
-  },
-}
-
--- general
-vim.opt.wrap = true
-vim.opt.relativenumber = true
-
--- keymappings
-vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true, silent = true })
-
--- vim wiki config
-vim.g.vimwiki_list = {
-	{ path = "/$HOME/Vimwiki", syntax = "markdown", ext = ".md" },
-	{ path = "/$HOME/Vimwiki/project/akb", syntax = "markdown", ext = ".md" },
-}
-
--- blankline config
-vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-vim.g.indent_blankline_filetype_exclude = {
-  "help",
-  "startify",
-  "dashboard",
-  "packer",
-  "neogitstatus",
-  "NvimTree",
-  "Trouble",
-}
-vim.g.indentLine_enabled = 1
--- vim.g.indent_blankline_char = "│"
-vim.g.indent_blankline_char = "▏"
-vim.g.indent_blankline_show_trailing_blankline_indent = false
-vim.g.indent_blankline_show_first_indent_level = true
-vim.g.indent_blankline_use_treesitter = true
-vim.g.indent_blankline_show_current_context = true
-vim.g.indent_blankline_context_patterns = {
-  "class",
-  "return",
-  "function",
-  "method",
-  "^if",
-  "^while",
-  "jsx_element",
-  "^for",
-  "^object",
-  "^table",
-  "block",
-  "arguments",
-  "if_statement",
-  "else_clause",
-  "jsx_element",
-  "jsx_self_closing_element",
-  "try_statement",
-  "catch_clause",
-  "import_statement",
-  "operation_type",
-}
--- HACK: work-around for https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
-vim.wo.colorcolumn = "99999"
+-- keymappings [view all the defaults by pressing <leader>Lk]
+lvim.leader = "space"
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.builtin.which_key.mappings["C"] = { "<cmd>ColorizerToggle<CR>", "Colorizer" }
+vim.cmd([[
+  nnoremap + <C-a>
+  nnoremap - <C-x>
+  nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+  nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+  nnoremap <Backspace> <C-^>
+  xnoremap . :norm.<CR>
+  nnoremap c "_c
+  nnoremap C "_C
+]])

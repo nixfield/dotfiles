@@ -1,5 +1,5 @@
 #!/bin/sh
-export MANPAGER='nvim +Man!'
+export MANPAGER='lvim +Man!'
 export MANWIDTH=999
 
 # Adds `~/.local/bin` to $PATH
