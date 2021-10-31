@@ -21,6 +21,7 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' completer _expand_alias _complete _ignored # expand alias with tab
 # zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complist
 compinit
@@ -85,6 +86,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 source /home/niko/.config/broot/launcher/bash/br
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # eval "$(fnm env)"
 eval "$(zoxide init zsh)"

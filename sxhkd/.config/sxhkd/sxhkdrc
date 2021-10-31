@@ -204,8 +204,8 @@ super + Return
 super + {q,w,r,b}
     {dmenulofi, dmenusearch, st -e lfrun, feh --bg-fill --randomize ~/Pictures/wall/*}
 
-super + control + w
-    firefox --private-window
+super + control + {w,m}
+    {firefox --private-window, spotify}
 
 super + shift + {q,w,r}
     {YTFZF_EXTMENU_LEN=160 ytfzf -Dl, firefox, thunar}
@@ -217,8 +217,8 @@ super + shift + {grave,c,b,n,m}
     {dmenuunicode, dmenuspell,dmenumarks ~/Vimwiki/bookmark.md,st -e newsboat; pkill -RTMIN+6 dwmblocks,st -e neomutt ; pkill -RTMIN+12 dwmblocks; rmdir ~/.abook}
 
 # polybar systray
-super + {_,shift} + z
-    {polybar-tray on,polybar-tray off}
+# super + {_,shift} + z
+#    {polybar-tray on,polybar-tray off}
 
 # music contorl
 super + {p, period,comma}
