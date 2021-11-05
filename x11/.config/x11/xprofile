@@ -15,7 +15,9 @@ unclutter &		# Remove mouse when idle
 clipmenud &   # Clipboard daemon
 dwmblocks &
 sxhkd &
-feh --bg-fill ~/Pictures/wall/wallhaven-72rg3o.png
+# feh --bg-fill ~/Pictures/wall/wallhaven-72rg3o.png
+~/.fehbg & # restore wallpaper
+crow &
 
 # This line autostarts an instance of Pulseaudio that does not exit on idle.
 # This is "necessary" on Artix due to a current bug between PA and
