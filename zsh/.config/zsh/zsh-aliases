@@ -87,4 +87,6 @@ alias \
     gc="git clone" \
     gp="git pull" \
     gs="git status" \
-
+    v='googler -V --url-handler mpv $argv' \
+    yv='googler -w youtube.com --url-handler mpv $argv' \
+    so='googler -j -w stackoverflow.com "(xsel)"' \

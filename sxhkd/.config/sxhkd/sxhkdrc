@@ -202,7 +202,7 @@ super + Return
     st
 
 super + {q,w,r,b}
-    {dmenulofi, dmenusearch, st -e lfrun, feh --bg-fill --randomize ~/Pictures/wall/*}
+    {dmenulofi, dmenusearch, st -e lfrun, feh --bg-fill --randomize ~/Pictures/walls/*}
 
 super + control + {w,m}
     {firefox --private-window, spotify}
