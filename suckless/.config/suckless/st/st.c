@@ -126,7 +126,7 @@ typedef struct {
 typedef struct {
 	int row;      /* nb row */
 	int col;      /* nb col */
-	int maxcol;
+        int maxcol;
 	Line *line;   /* screen */
 	Line *alt;    /* alternate screen */
 	Line hist[HISTSIZE]; /* history buffer */
@@ -1338,7 +1338,7 @@ tclearregion(int x1, int y1, int x2, int y2)
 	if (y1 > y2)
 		temp = y1, y1 = y2, y2 = temp;
 
-	LIMIT(x1, 0, term.maxcol-1);
+        LIMIT(x1, 0, term.maxcol-1);
 	LIMIT(x2, 0, term.maxcol-1);
 	LIMIT(y1, 0, term.row-1);
 	LIMIT(y2, 0, term.row-1);
@@ -2663,12 +2663,12 @@ void
 tresize(int col, int row)
 {
 	int i, j;
-	int tmp;
-	int minrow, mincol;
+        int tmp;
+ 	int minrow, mincol;
 	int *bp;
 	TCursor c;
 
-	tmp = col;
+        tmp = col;
 	if (!term.maxcol)
 		term.maxcol = term.col;
 	col = MAX(col, term.maxcol);
@@ -2725,10 +2725,10 @@ tresize(int col, int row)
 		term.line[i] = xmalloc(col * sizeof(Glyph));
 		term.alt[i] = xmalloc(col * sizeof(Glyph));
 	}
-	if (col > term.maxcol) {
-		bp = term.tabs + term.maxcol;
 
-		memset(bp, 0, sizeof(*term.tabs) * (col - term.maxcol));
+        if (col > term.maxcol) {
+ 		bp = term.tabs + term.maxcol;
+                memset(bp, 0, sizeof(*term.tabs) * (col - term.maxcol));
 		while (--bp > term.tabs && !*bp)
 			/* nothing */ ;
 		for (bp += tabspaces; bp < term.tabs + col; bp += tabspaces)
@@ -2736,7 +2736,7 @@ tresize(int col, int row)
 	}
 	/* update terminal size */
 	term.col = tmp;
-	term.maxcol = col;
+        term.maxcol = col;
 	term.row = row;
 	/* reset scrolling region */
 	tsetscroll(0, row-1);

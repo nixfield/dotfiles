@@ -1,69 +1,95 @@
-# st (Simple Terminal)
+# St (Suckless Terminal)
 
-My custom terminal build based on (lukesmith's build only for ligatures ) with some additional patches like newterm , rightclick paste , desktop entry ,sixel, live-reload xresources , anygeometry etc!.
+## Xresources live-reload demo
+
+<img src="https://github.com/siduck/dotfiles/blob/all/rice%20flex/live-reloadXresources.gif"> <br><br>
+
+## Dependencies
+
+```
+# Void 
+xbps-install libXft-devel libX11-devel harfbuzz-devel libXext-devel libXrender-devel libXinerama-devel
+ 
+# Debian (and ubuntu probably)
+apt install build-essential libxft-dev libharfbuzz-dev 
+
+(most of these are already installed on Arch based distros)
+
+# Install font-symbola and libXft-bgra
+```
+
+## Install
+
+```
+git clone https://github.com/siduck/st.git
+cd st
+sudo make install 
+xrdb merge pathToXresourcesFile
+```
+
+(note : put the xrdb merge command in your wm's autostart or similar) 
+
+## Fonts 
+
+- Install JetbrainsMono Mono Nerd Font or any nerd font from [here](https://www.nerdfonts.com/font-downloads)
 
 ## Patches:
 
+- alpha 
 - Ligatures
+- sixel (check sixel branch)
+- scrollback
 - Clipboard
 - Alpha(Transparency)
 - Boxdraw
-- w3m
+- patch_column ( doesnt cut text while resizing)
 - font2
 - right click paste
 - st desktop entry
 - newterm
-- anysize
 - anygeometry
+- xresources
+- sync patch ( Better draw timing to reduce flicker/tearing and improve animation smoothness )
 - live reload ( change colors/fonts on the fly )
   and more...
   <br>
 
-## How to apply Xresources and live-reload ?
+## Xresources live-reload
 
 ```
- #make an alias for this command
+# make an alias for this command
 
-alias load="kill -USR1 $(pidof st)"
-alias  use="xrdb merge"
-
-command : use Xresourcesfile && load
-
+alias rel="xrdb merge pathToXresourcesFile && kill -USR1 $(pidof st)"
 ```
-## Xresources live-reload demo
 
-<img src="https://github.com/siduck76/dotfiles/blob/master/rice%20flex/live-reloadXresources.gif"> <br><br>
+## Ram usage comparison with other terminals and speed test
+<img src="https://raw.githubusercontent.com/siduck/dotfiles/all/rice%20flex/terminal_ramUsage.jpg"> <br><br>
+<img src="https://raw.githubusercontent.com/siduck/dotfiles/all/rice%20flex/speedTest.png"> <br><br>
+<img src="https://raw.githubusercontent.com/siduck/dotfiles/all/rice%20flex/speedTest1.png"> <br><br>
 
-<b>DON'T SKIP THE README, if you want to have a similar setup / know default keybinds.<br><br></b>
+( note : This benchmark was done on my low end machine which has a pentium cpu so the speed results might vary )
 
-## Dependencies : <br>
-
-`libXft-devel libX11-devel harfbuzz-devel libXext-devel libXrender-devel libXinerama-devel ( on void linux , these are probably already installed on your system if you use arch based or debian I think)`
-
-## Install <br>
-
-`cd st & make && sudo make install `<br>
-
-## Ram comparison with other terminals 
-<img src="https://raw.githubusercontent.com/siduck76/dotfiles/master/rice%20flex/terminal_ramUsage.jpg"> <br><br>
-
-## Keybindings<br>
+## Default Keybindings<br>
 
 <pre>
 ctrl + shift + c        Copy  <br>
 ctrl + shift + v        Paste <br>
+right click on the terminal ( will paste the copied thing ) 
+
+(Zoom)
 alt  + comma            Zoom in <br>
 alt  + .                Zoom out <br>
 alt  + g                Reset Zoom<br>
-alt  + s                Increase Transparency<br>
-alt  + a                Decrease Transparency <br>
-copy anything and right click on the terminal ( will paste the copied thing ) 
-mod + shift + enter    open a new terminal with same cwd ( current working directory )
 
+(Transparency)
+alt  + s                Increase Transparency<br>
+alt  + a                Decrease Transparency<br>
+alt  + m                Reset Transparency<br>
 
 alt + k                 scroll down 
 alt + j                 scroll up
 
+mod + shift + enter    open a new terminal with same cwd ( current working directory )
 </pre>
 
 you can change all of these in config.h
@@ -71,15 +97,28 @@ you can change all of these in config.h
 
 ## Themes/Fonts used
 
-ls-icons: https://github.com/Yash-Handa/logo-ls <br>
-Xresources: onedark ( just xrdb merge xresourcesfile , do this everytime you make any change to xresources file ) from this repo itself.<br>
-Font: <a href="https://github.com/siduck76/matfonts"> JetbrainsMono Nerd Font + material design icon fonts </a>
-
-a lil<a href="https://share.vidyard.com/watch/sdFeoxaRr124U893WVEcxN?"> video </a>demo to show zoom/alpha changing via keybinds
+- ls-icons: https://github.com/Yash-Handa/logo-ls <br>
+- Xresources: onedark ( just xrdb merge xresourcesfile , do this everytime you make any change to xresources file ) from this repo itself.<br>
+- Font: JetbrainsMono Nerd Font + material design icon fonts
 
 ## Screenshots:
 
-<img src="https://raw.githubusercontent.com/siduck76/personal-backup/master/delete_this/bruh.png"> <br><br>
-<img src="https://raw.githubusercontent.com/siduck76/personal-backup/master/delete_this/ithree0-36-43.png"> <br><br>
-<img src="https://raw.githubusercontent.com/siduck76/personal-backup/master/delete_this/two7-00.png"> <br><br>
-<img src="https://raw.githubusercontent.com/siduck76/personal-backup/master/delete_this/u.png"> <br><hr>
+<img src="https://raw.githubusercontent.com/siduck/dotfiles/all/misc/delete_this/bruh.png"> <br><br>
+<img src="https://raw.githubusercontent.com/siduck/dotfiles/all/misc/delete_this/ithree0-36-43.png"> <br><br>
+<img src="https://raw.githubusercontent.com/siduck/dotfiles/all/misc/delete_this/two7-00.png"> <br><br>
+<img src="https://raw.githubusercontent.com/siduck/dotfiles/all/misc/delete_this/u.png"> <br><hr>
+
+# Credits
+
+- [live-reload](https://github.com/nimaipatel/st) 
+- [patch_column](https://github.com/nimaipatel/st/blob/all/patches/7672445bab01cb4e861651dc540566ac22e25812.diff)
+
+## Other St builds <br>
+
+1. Sixel St (sixel branch , with sixel graphics support)
+2. St with vim-browse (vim-browse branch , navigate within like vim)
+3. Awesomewm users might face a weird gaps issue (#23) so they need to use the anysize branch.
+
+- Use a different st build ( clone its branch)
+
+`example: git clone https://github.com/siduck/st --branch sixel`

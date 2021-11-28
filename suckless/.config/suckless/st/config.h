@@ -52,6 +52,12 @@ static double minlatency = 8;
 static double maxlatency = 33;
 
 /*
+ * Synchronized-Update timeout in ms
+ * https://gitlab.com/gnachman/iterm2/-/wikis/synchronized-updates-spec
+ */
+static uint su_timeout = 200;
+
+/*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
@@ -216,6 +222,7 @@ ResourcePref resources[] = {
  * Internal mouse shortcuts.
  * Beware that overloading Button1 will disable the selection.
  */
+const unsigned int mousescrollincrement = 3;
 static MouseShortcut mshortcuts[] = {
   /* button               mask            string */
   { Button4,              XK_NO_MOD,      "\031" },
@@ -228,8 +235,8 @@ static MouseShortcut mshortcuts[] = {
 
 MouseKey mkeys[] = {
   /* button               mask            function        argument */
-  { Button4,              XK_NO_MOD,      kscrollup,      {.i =  1} },
-  { Button5,              XK_NO_MOD,      kscrolldown,    {.i =  1} },
+  { Button4,              XK_NO_MOD,      kscrollup,      {.i =  mousescrollincrement} },
+  { Button5,              XK_NO_MOD,      kscrolldown,    {.i =  mousescrollincrement} },
   { Button4,              Mod4Mask,        zoom,           {.f =  +1} },
   { Button5,              Mod4Mask,        zoom,           {.f =  -1} },
 };
@@ -243,20 +250,17 @@ static char *copyurlcmd[] = { "/bin/sh", "-c",
 static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
 
 static char *copyoutput_noprompt[] = { "/bin/sh", "-c", "st-copyout noprompt", "externalpipe", NULL };
-
 static Shortcut shortcuts[] = {
   /* mask                 keysym          function        argument */
   { XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
   { ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
   { ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
   { XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-  { MODKEY,               XK_period,       zoom,           {.f = +1} },
-  { MODKEY,               XK_comma,      zoom,           {.f = -1} },
+  { MODKEY,              XK_comma,       zoom,           {.f = +1} },
+  { MODKEY,              XK_period,        zoom,           {.f = -1} },
   { MODKEY,               XK_g,        zoomreset,      {.f =  0} },
-  /* { ControlMask | ShiftMask,               XK_C,           clipcopy,       {.i =  0} }, */
-  /* { ControlMask | ShiftMask,               XK_V,           clippaste,      {.i =  0} }, */
-  { MODKEY,               XK_c,           clipcopy,       {.i =  0} },
-  { MODKEY,               XK_v,           clippaste,      {.i =  0} },
+  { ControlMask | ShiftMask,               XK_C,           clipcopy,       {.i =  0} },
+  { ControlMask | ShiftMask,               XK_V,           clippaste,      {.i =  0} },
   { ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
   { XK_ANY_MOD,		Button2,	selpaste,	{.i =  0} },
   { MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
@@ -273,6 +277,7 @@ static Shortcut shortcuts[] = {
   { MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
   { MODKEY,		XK_s,		changealpha,	{.f = -0.05} },
   { MODKEY,		XK_a,		changealpha,	{.f = +0.05} },
+  { MODKEY,		XK_m,		changealpha,	{.f = +2.00} },
   { TERMMOD,              XK_Up,          zoom,           {.f = +1} },
   { TERMMOD,              XK_Down,        zoom,           {.f = -1} },
   { TERMMOD,              XK_K,           zoom,           {.f = +1} },
