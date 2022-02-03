@@ -26,3 +26,12 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC14ZKB9XsDZbnHVmr4AmUpQ "~P
 
 # Blog
 https://bandithijo.github.io/feed/blog.xml "~Bandithijo" "linux" "blog"
+
+# Manga
+https://mangaid.click/feed "~MangaID" "manga"
+
+# Github
+https://github.com/nixfield.private.atom?token=AOV4YJLSLNRS7S5NQO6ROHN7ZPWOA
+
+-------Podcast-------
+https://anchor.fm/s/ec484e4/podcast/rss
