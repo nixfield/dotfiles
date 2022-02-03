@@ -12,3 +12,9 @@ local/.local/bin/tqdm
 
 lvim/.config/lvim/plugin/packer_compiled.lua
 calcurse/.config/calcurse/conf
+suckless/.config/suckless/dwm/dwm
+suckless/.config/suckless/dwm/dwm.o
+
+*.o
+*.orig
+*.rej
