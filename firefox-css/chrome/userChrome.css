@@ -161,12 +161,12 @@ panel[type="arrow"] {
 
 #widget-overflow-fixed-list {
   display: grid;
-  grid-template-areas: "s s s" "a a a";
+  grid-template-areas: "s s s s s" "a a a a a";
   grid-auto-columns: auto;
 }
 
 #widget-overflow-mainView[visible] #widget-overflow-fixed-list {
-  max-width: 110px;
+  max-width: 300px;
 }
 #widget-overflow-mainView ~ panelview[visible] {
   max-width: unset !important;
