@@ -1,7 +1,7 @@
 configuration{
     modi: "run,drun,window";
     lines: 5;
-    font: "Sarasa Nerd Font 14";
+    font: "Product Sans 14";
     show-icons: true;
     icon-theme: "Oranchelo";
     terminal: "st";
@@ -9,9 +9,9 @@ configuration{
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: " 﩯  window";
+    display-drun: "  Apps ";
+    display-run: "  Run ";
+    display-window: "﩯  window";
     /* display-Network: " 󰤨  Network"; */
     sidebar-mode: true;
 }

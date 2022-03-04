@@ -18,3 +18,7 @@ suckless/.config/suckless/dwm/dwm.o
 *.o
 *.orig
 *.rej
+
+suckless/.config/suckless/dwm/dwm
+suckless/.config/suckless/dwm/dwm
+suckless/.config/suckless/dwm/dwm.o
