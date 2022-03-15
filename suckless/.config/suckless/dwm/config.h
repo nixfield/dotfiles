@@ -29,6 +29,7 @@ static int showbar = 1; /* 0 means no bar */
 static int topbar = 1;  /* 0 means bottom bar */
 static int user_bh = 20; /* 0 means that dwm will calculate bar height, >= 1
                             means dwm will user_bh as bar height */
+static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen window */
 static char *fonts[] = {"JetBrains Mono Nerd Font Bandit:size=10"};
 static char normbgcolor[] = "#151515";
 static char normbordercolor[] = "#151515";
