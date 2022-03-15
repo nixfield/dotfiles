@@ -1,5 +1,3 @@
-!-- Xft settings -- ! you dont even need this probably 
-
 Xft.antialias:	1
 Xft.hinting:	1
 Xft.autohint:	0
@@ -7,47 +5,45 @@ Xft.hintstyle:	hintslight
 Xft.rgba:	rgb
 Xft.lcdfilter:	lcddefault
 
-! transparency ( 0.1 to 0.9 values)
-st.alpha: 0.8 
+st.font:         JetBrainsMono Nerd Font:style:medium:pixelsize=13
 
-! inner padding
-st.borderpx:          15
-st.font:         JetBrainsMono Nerd Font:style:medium:pixelsize=15
+! window padding
+st.borderpx: 20
 
-!! Colors
+!- 0.1 to 0.9 = transparency
+st.alpha: 1.0
 
-!! Dracula  palette
-*.foreground: #F8F8F2
-*.background: #282A36
+*background: #181f21
+*foreground: #dadada
 
-!! black + grey
-*.color0:     #000000
-*.color8:     #4D4D4D
+! Black + DarkGrey
+*color0:  #22292b
+*color8:  #575e60
 
-!! dark red + red
-*.color1:     #FF5555
-*.color9:     #FF6E67
+! DarkRed + Red
+*color1:  #e06e6e
+*color9:  #ef7d7d
 
-!! green
-*.color2:     #50FA7B
-*.color10:    #5AF78E
+! DarkGreen + Green
+*color2:  #8ccf7e
+*color10: #9bdead
 
-!! yellow
-*.color3:     #F1FA8C
-*.color11:    #F4F99D
+! DarkYellow + Yellow
+*color3:  #e5c76b
+*color11: #f4d67a
 
-!! purple
-*.color4:     #BD93F9
-*.color12:    #CAA9FA
+! DarkBlue + Blue
+*color4:  #67b0e8
+*color12: #6cb5ed
 
-!! pink
-*.color5:     #FF79C6
-*.color13:    #FF92D0
+! DarkMagenta + Magenta
+*color5:  #c47fd5
+*color13: #ce89df
 
-!! cyan
-*.color6:     #8BE9FD
-*.color14:    #9AEDFE
+! DarkCyan + Cyan
+*color6:  #6da4cd
+*color14: #67cbe7
 
-!! white
-*.color7:     #BFBFBF
-*.color15:    #E6E6E6
+! LightGrey + White
+*color7:  #b3b9b8
+*color15: #bdc3c2
