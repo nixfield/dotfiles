@@ -260,14 +260,14 @@ static Key keys[] = {
 
     /* Change window monitor focus */
     /* NOTE:Uncomment this if using more than 1 monitor */
-    /* { MODKEY,			XK_Left,	focusmon,	{.i = -1 } },
-     */
-    /* { MODKEY|ShiftMask,		XK_Left,	tagmon,		{.i = -1 } },
-     */
-    /* { MODKEY,			XK_Right,	focusmon,	{.i = +1 } },
-     */
-    /* { MODKEY|ShiftMask,		XK_Right,	tagmon,		{.i = +1 } },
-     */
+    { MODKEY,			XK_comma,	focusmon,	{.i = -1 } },
+    
+    { MODKEY|ShiftMask,		XK_comma,	tagmon,		{.i = -1 } },
+    
+    { MODKEY,			XK_period,	focusmon,	{.i = +1 } },
+    
+    { MODKEY|ShiftMask,		XK_period,	tagmon,		{.i = +1 } },
+    
 
 };
 

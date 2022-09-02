@@ -39,7 +39,7 @@ autoload -Uz colors && colors
 source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
-# zsh_add_file "zsh-exports"
+zsh_add_file "zsh-exports"
 zsh_add_file "zsh-vim-mode"
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-prompt"
@@ -64,7 +64,7 @@ bindkey "^n" down-line-or-beginning-search # Down
 bindkey "^k" up-line-or-beginning-search # Up
 bindkey "^j" down-line-or-beginning-search # Down
 bindkey -r "^u"
-bindkey -r "^d"
+# bindkey -r "^d"
 bindkey '^X^m' accept-line-swallow
 zle -N accept-line-swallow acceptandswallow
 acceptandswallow() {
@@ -85,10 +85,10 @@ compinit
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-source /home/niko/.config/broot/launcher/bash/br
+# source /home/niko/.config/broot/launcher/bash/br
 source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # eval "$(fnm env)"
 eval "$(zoxide init zsh)"
 # eval "`pip completion --zsh`"
-eval "$(thefuck --alias)"
+# eval "$(thefuck --alias)"
