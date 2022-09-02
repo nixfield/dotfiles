@@ -13,7 +13,7 @@
 
 require "mp"
 
-function copy_subtitle ()
+function copy_subtitle()
   local subtitle = mp.get_property("sub-text")
   mp.commandv(
     "run", "/bin/bash", "-c",
@@ -22,4 +22,4 @@ function copy_subtitle ()
   mp.osd_message("Subtitle line copied to clipboard")
 end
 
-mp.add_key_binding("Ctrl+c", "copy-subtitle", copy_subtitle)
+mp.add_key_binding("Ctrl+S", "copy-subtitle", copy_subtitle)
