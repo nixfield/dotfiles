@@ -29,9 +29,12 @@ static int showbar = 1; /* 0 means no bar */
 static int topbar = 1;  /* 0 means bottom bar */
 static int user_bh = 20; /* 0 means that dwm will calculate bar height, >= 1
                             means dwm will user_bh as bar height */
-static const int lockfullscreen = 0; /* 1 will force focus on the fullscreen window */
-static char *fonts[] = {"JetBrains Mono Nerd Font Bandit:size=10"};
-static char normbgcolor[] = "#151515";
+static const int lockfullscreen =
+    0; /* 1 will force focus on the fullscreen window */
+static char *fonts[] = {
+    "JetBrains Mono Nerd Font "
+    "Bandit:size=9:style=bold:antialias=true:autohint=true"};
+static char normbgcolor[] = "#151514";
 static char normbordercolor[] = "#151515";
 static char normfgcolor[] = "#f5f5f5";
 static char selfgcolor[] = "#151515";
@@ -75,8 +78,17 @@ static Sp scratchpads[] = {
 // "VIII", "IX" };
 
 /* tagging Japanase Letter */
-static const char *tags[] = {"一", "二", "三", "四", "五", "六", "七",
-                             "八", "九"};
+static const char *tags[] = {"一", "二", "三", "四", "五",
+                             "六", "七", "八", "九"};
+
+static const unsigned int ulinepad =
+    5; /* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke =
+    2; /* thickness / height of the underline */
+static const unsigned int ulinevoffset =
+    1; /* how far above the bottom of the bar the line should appear */
+static const int ulineall =
+    0; /* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -260,14 +272,13 @@ static Key keys[] = {
 
     /* Change window monitor focus */
     /* NOTE:Uncomment this if using more than 1 monitor */
-    { MODKEY,			XK_comma,	focusmon,	{.i = -1 } },
-    
-    { MODKEY|ShiftMask,		XK_comma,	tagmon,		{.i = -1 } },
-    
-    { MODKEY,			XK_period,	focusmon,	{.i = +1 } },
-    
-    { MODKEY|ShiftMask,		XK_period,	tagmon,		{.i = +1 } },
-    
+    {MODKEY, XK_comma, focusmon, {.i = -1}},
+
+    {MODKEY | ShiftMask, XK_comma, tagmon, {.i = -1}},
+
+    {MODKEY, XK_period, focusmon, {.i = +1}},
+
+    {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
 
 };
 
@@ -303,7 +314,9 @@ static Button buttons[] = {
      * if you want to control these separately (i.e. to retain the feature to
      * move a tiled window into a floating position).
      */
-    /* { ClkClientWin,         0,         Button2,        togglefullscr,	{0} },
+    /* { ClkClientWin,         0,         Button2,        togglefullscr,
+     * {0}
+     * },
      */
     {ClkClientWin, MODKEY, Button1, moveorplace, {.i = 1}},
     {ClkClientWin, MODKEY, Button2, defaultgaps, {0}},

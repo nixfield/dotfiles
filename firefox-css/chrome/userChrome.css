@@ -458,3 +458,43 @@ See the above repository for updates as well as full license text. */
 /* Hide the container line above tabs */
 .tab-context-line{ display: none }
 
+/* ICON ONLT TABS */
+.tab-content > :not(.tab-icon-stack){
+  display: none
+}
+.tab-icon-image:not([src]){
+  display: -moz-box !important;
+}
+.tab-icon-stack > *{ margin-inline: 0 !important; }
+.tabbrowser-tab{ -moz-box-flex: 0 !important; }
+
+.tabbrowser-tab[fadein]{ min-width: calc(16px + 2 * 10px + 4px) !important; }
+:root[uidensity="compact"] .tabbrowser-tab[fadein]{
+  min-width: calc(16px + 2 * var(--inline-tab-padding,0px) + 4px) !important;
+}
+:root:not([uidensity="compact"]) .tab-content{ padding-inline: 10px !important; }
+
+/* END OF ICON ONLT TABS */
+
+/* If one uses custom Windows theme, then Firefox uses high-contrast window control buttons. This style makes Firefox fall back to using normal window control style. */
+
+.titlebar-button{
+  background-color: transparent !important;
+  -moz-context-properties: stroke !important;
+  stroke: currentColor !important;
+}
+.titlebar-button:hover{ background-color: hsla(0,0%,100%,.32) !important }
+.titlebar-close:hover{ background-color: hsl(355,86%,49%) !important }
+
+.titlebar-close{ list-style-image: url(chrome://browser/skin/window-controls/close.svg) !important }
+.titlebar-min{ list-style-image: url(chrome://browser/skin/window-controls/minimize.svg) !important }
+.titlebar-max{ list-style-image: url(chrome://browser/skin/window-controls/maximize.svg) !important }
+.titlebar-restore{ list-style-image: url(chrome://browser/skin/window-controls/restore.svg) !important }
+
+/* Always show tab close button on hover and never otherwise */
+#tabbrowser-tabs #tabs-newtab-button{
+  display:none;
+}
+#tabbrowser-tabs:hover #tabs-newtab-button{
+  display:-moz-box !important;
+}
