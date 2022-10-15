@@ -14,9 +14,9 @@ See the above repository for updates as well as full license text. */
 
   /* Modify these to change relative widths or default height */
   #navigator-toolbox {
-    --uc-navigationbar-width: 40vw;
+    --uc-navigationbar-width: 45vw;
     --uc-toolbar-height: 40px;
-    --uc-urlbar-min-width: 50vw; /* minimum width for opened urlbar */
+    --uc-urlbar-min-width: 45vw; /* minimum width for opened urlbar */
   }
   @media (-moz-proton) {
     #scrollbutton-up,
@@ -166,7 +166,7 @@ panel[type="arrow"] {
 }
 
 #widget-overflow-mainView[visible] #widget-overflow-fixed-list {
-  max-width: 300px;
+  max-width: 500px;
 }
 #widget-overflow-mainView ~ panelview[visible] {
   max-width: unset !important;
@@ -485,7 +485,6 @@ See the above repository for updates as well as full license text. */
 }
 .titlebar-button:hover{ background-color: hsla(0,0%,100%,.32) !important }
 .titlebar-close:hover{ background-color: hsl(355,86%,49%) !important }
-
 .titlebar-close{ list-style-image: url(chrome://browser/skin/window-controls/close.svg) !important }
 .titlebar-min{ list-style-image: url(chrome://browser/skin/window-controls/minimize.svg) !important }
 .titlebar-max{ list-style-image: url(chrome://browser/skin/window-controls/maximize.svg) !important }
@@ -498,3 +497,47 @@ See the above repository for updates as well as full license text. */
 #tabbrowser-tabs:hover #tabs-newtab-button{
   display:-moz-box !important;
 }
+
+/* remove margin between hamburger menu and tab */
+/* #PanelUI-menu-button {
+  margin-right: -8px !important;
+}
+ */
+
+/* show color under active tab */
+#TabsToolbar .tabbrowser-tab[selected=true] .tab-background {
+  box-shadow: none !important;
+  border-left:2px solid var(--focus-outline-color) !important;
+}
+
+/* This style creates a fake loading progress bar to the bottom of a tab as a replacement for normal loading throbber */
+
+@keyframes tab-loading-line-anim{ from{ background-size: 0% } to { background-size: 20% } }
+.tab-background::after{
+    background-size: 90%;
+}
+.tabbrowser-tab:is([busy],[bursting]) > .tab-stack > .tab-background::after{
+  content: "";
+  display: -moz-box;
+  height: 2px;
+  background-color:transparent;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(currentColor,currentColor);
+  transition: background-size 80ms ease-out;
+}
+.tabbrowser-tab[busy]:not([progress],[bursting]) > .tab-stack > .tab-background::after{
+  animation: tab-loading-line-anim 80ms ease;
+  background-size: 20%;
+  opacity: 0.5;
+}
+.tabbrowser-tab[busy][progress] > .tab-stack > .tab-background::after{
+  transition-duration: 2000ms;
+}
+.tabbrowser-tab[bursting] > .tab-stack > .tab-background::after{
+  transition: background-size 80ms ease-out, opacity 80ms linear;
+  background-size: 100%;
+  opacity: 0;
+}
+.tab-throbber{ display: none !important; }
+.tab-icon-image[src]{ display: -moz-box !important; }
+
