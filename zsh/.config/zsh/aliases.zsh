@@ -1,0 +1,93 @@
+#!/bin/sh
+alias j='z'
+alias f='zi'
+alias n='nvim'
+alias no='nvim -o'
+alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
+
+# # Colorize grep output (good for log files)
+# alias grep='grep --color=auto'
+# alias egrep='egrep --color=auto'
+# alias fgrep='fgrep --color=auto'
+# 
+# confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+# 
+# easier to read disk
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+
+# get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4 | head -5'
+
+# get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3 | head -5'
+
+# gpg encryption
+# verify signature for isos
+alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
+# receive the key of a developer
+alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
+
+# For when keys break
+alias archlinx-fix-keys="sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman-key --refresh-keys"
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vimdiff="nvim -d"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	mkd="mkdir -pv" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi" 
+
+# get fastest mirrors
+alias \
+    mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist" \
+    mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist" \
+    mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist" \
+    mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist" 
+
+# lampp
+alias \
+    xa="sudo /opt/lampp/lampp start" \
+    xas="sudo /opt/lampp/lampp stop" \
+    xar="sudo /opt/lampp/lampp restart" \
+
+alias \
+	p="sudo pacman" \
+	cat="bat" \
+	ls="exa --icons --group-directories-first" \
+	la="exa -lha --icons --group-directories-first" \
+	t="trans :id" \
+	te="trans :en" \
+	k="ps -u $USER k -size -o %mem=,%cpu=,comm= |dmenu -i -l 15 |awk '{print $1}'" \
+	yt="ytfzf -t" \
+	yta="ytfzf -tm" \
+	ytd="ytfzf -df" \
+	ytr="ytfzf -r" \
+	ttq="curl http://api.quotable.io/random|jq '[.text=.content|.attribution=.author]'|tt -quotes -" \
+  config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME' \
+  topdf="libreoffice --headless --invisible --convert-to pdf" \
+  allpdf='for file in *.pptx *.ppt;do libreoffice --headless --invisible --convert-to pdf $file;rm $file;done' \
+  bagi='curl -F"file=@$(find $pwd -type f | fzf)" 0x0.st' \
+  tte="tt -quotes en" \
+  gc="git clone" \
+  pac="nvim ~/Documents/localpkglist.txt" \
+  za="zathura" \
+  lf="lfrun" \
+  cfa="n ~/.config/zsh/zsh-aliases" \
+  lunarupdate="cd ~/.local/share/lunarvim/lvim && git pull;lvim +LvimCacheReset +PackerUpdate" \
+  gc="git clone" \
+  gp="git pull" \
+  gs="git status" \
+  v='googler -V --url-handler mpv $argv' \
+  yv='googler -w youtube.com --url-handler mpv $argv' \
+  so='googler -j -w stackoverflow.com "(xsel)"' \
+  expand-tmp='sudo mount -o remount,size=5G /tmp/' \

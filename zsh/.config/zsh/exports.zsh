@@ -1,54 +1,32 @@
 #!/bin/sh
+HISTSIZE=1000000
+SAVEHIST=1000000
 
-export MANPAGER='lvim +Man!'
-export MANWIDTH=999
+eval "$(zoxide init zsh)"
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin" | cut -f2 | paste -sd ':' -)"
 export PATH="$PATH:$HOME/.local/bin/statusbar"
 export PATH="$PATH:$HOME/.npm-global/bin"
-export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
 # Default programs:
-export EDITOR="lvim"
+export EDITOR="nvim"
 export TERMINAL="st"
-export BROWSER="firefox"
+export BROWSER="firefox-developer-edition"
 
 # ~/ Clean-up:
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
-export GTK2_RC_FILES="${XDG_CONFIG_HOME:-$HOME/.config}/gtk-2.0/gtkrc-2.0"
-export LESSHISTFILE="-"
-export WGETRC="${XDG_CONFIG_HOME:-$HOME/.config}/wget/wgetrc"
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 # export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/wineprefixes/default"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
 export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
-export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
 export NPM_CONFIG_PREFIX=~/.npm-global
-# export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-# export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
-# export WEECHAT_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/weechat"
 
 # Other program settings:
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
-export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
-export LESS=-R
-export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
-export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
-export LESS_TERMCAP_me="$(printf '%b' '[0m')"
-export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
-export LESS_TERMCAP_se="$(printf '%b' '[0m')"
-export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
-export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export QT_QPA_PLATFORMTHEME="qt5ct"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
-export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 
 # This is the list for lf icons:
@@ -218,3 +196,18 @@ ex=:\
 sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/larbs/ttymaps.kmap 2>/dev/null
 
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/nix/D/.miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ 1 -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+    if [ -f "$PWD/D/.miniconda/etc/profile.d/conda.sh" ]; then
+        . "$PWD/D/.miniconda/etc/profile.d/conda.sh"
+    else
+        export PATH="$PWD/D/.miniconda/bin:$PATH"
+    fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<

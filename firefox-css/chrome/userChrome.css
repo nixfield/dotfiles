@@ -6,99 +6,86 @@ See the above repository for updates as well as full license text. */
 /* Use page_action_buttons_on_hover.css to hide page-action-buttons to save more space for the address */
 /* Toolbars will be shown normally if window width goes below the value below */
 /* Modify it to suit your needs */
-@media screen and (min-width: 800px) {
-  :root[uidensity="compact"] {
+@media screen and (min-width: 800px){
+  :root[tabsintitlebar][sizemode="normal"]{
+    --uc-window-drag-space-width: 24px;
+  }
+  :root[uidensity="compact"]{
     --tab-block-margin: 2px !important;
-    --proton-tab-block-margin: 2px !important;
+    }
+  
+  /* Modify these to change relative widths or default height */
+  #navigator-toolbox{
+    --uc-navigationbar-width: 50vw;
+    --uc-toolbar-height: 40px;
+    --uc-urlbar-min-width: 30vw; /* minimum width for opened urlbar */
   }
 
-  /* Modify these to change relative widths or default height */
-  #navigator-toolbox {
-    --uc-navigationbar-width: 45vw;
-    --uc-toolbar-height: 40px;
-    --uc-urlbar-min-width: 45vw; /* minimum width for opened urlbar */
-  }
-  @media (-moz-proton) {
-    #scrollbutton-up,
-    #scrollbutton-down {
-      border-block-width: 2px !important;
-    }
-  }
-  /* prevent urlbar overflow on narrow windows */
-  /* Dependent on how many items are in navigation toolbar ADJUST AS NEEDED */
-  @media screen and (max-width: 1500px) {
-    #urlbar-container {
-      min-width: unset !important;
+  #scrollbutton-up,
+  #scrollbutton-down{ border-block-width: 2px !important; }
+  
+/* prevent urlbar overflow on narrow windows */
+/* Dependent on how many items are in navigation toolbar ADJUST AS NEEDED */
+  @media screen and (max-width: 1500px){
+    #urlbar-container{
+      min-width: 300px !important;
+      flex-shrink: 1 !important;
     }
   }
 
   /* Override for other densities */
-  :root[uidensity="compact"] #navigator-toolbox {
-    --uc-toolbar-height: 34px;
-  }
-  :root[uidensity="touch"] #navigator-toolbox {
-    --uc-toolbar-height: 44px;
-  }
+  :root[uidensity="compact"] #navigator-toolbox{ --uc-toolbar-height: 34px; }
+  :root[uidensity="touch"] #navigator-toolbox{ --uc-toolbar-height: 44px; }
 
-  #TabsToolbar {
+  #TabsToolbar{
     margin-left: var(--uc-navigationbar-width);
     --tabs-navbar-shadow-size: 0px;
   }
-  #tabbrowser-tabs {
-    --tab-min-height: calc(
-      var(--uc-toolbar-height) - 2 * var(--tab-block-margin, 0px)
-    ) !important;
-  }
-
+  #tabbrowser-tabs{
+  --tab-min-height: calc(var(--uc-toolbar-height) - 2 * var(--tab-block-margin,0px)) !important;
+}
+  
   /* This isn't useful when tabs start in the middle of the window */
-  .titlebar-spacer[type="pre-tabs"] {
-    display: none;
-  }
-
-  #navigator-toolbox > #nav-bar {
-    margin-right: calc(100vw - var(--uc-navigationbar-width));
+  .titlebar-spacer[type="pre-tabs"]{ display: none }
+  
+  #navigator-toolbox > #nav-bar{
+    margin-right:calc(100vw - var(--uc-navigationbar-width));
     margin-top: calc(0px - var(--uc-toolbar-height));
   }
 
   /* Window drag space  */
-  :root[tabsintitlebar="true"] #nav-bar {
-    padding-left: 24px !important;
-  }
+  :root[tabsintitlebar="true"] #nav-bar{ padding-left: var(--uc-window-drag-space-width) !important }
 
-  /* Rules specific to window controls on right layout */
-  @supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled") {
-    .titlebar-buttonbox-container {
+  /* Rules for window controls on left layout */
+
+  @media (-moz-gtk-csd-reversed-placement),
+         (-moz-platform: macos){
+    .titlebar-buttonbox-container{
       position: fixed;
-      display: block;
+      display: flex;
       left: 0px;
       z-index: 3;
+      height: var(--uc-toolbar-height);
+      align-items: center
     }
-    :root[tabsintitlebar="true"] #nav-bar {
-      padding-left: 96px !important;
-      padding-right: 0px !important;
-    }
+    :root[tabsintitlebar="true"] #nav-bar{ padding-inline: calc(var(--uc-window-drag-space-width,0px) + 84px) 0px !important; }
+  }
+  @media (-moz-platform: macos){
+    :root[tabsintitlebar="true"] #nav-bar{ padding-inline: calc(var(--uc-window-drag-space-width,0px) + 72px) 0px !important; }
   }
 
   /* 1px margin on touch density causes tabs to be too high */
-  .tab-close-button {
-    margin-top: 0 !important;
-  }
+  .tab-close-button{ margin-top: 0 !important }
 
   /* Make opened urlbar overlay the toolbar */
-  #urlbar[open]:focus-within {
-    min-width: var(--uc-urlbar-min-width, none) !important;
-  }
+  #urlbar[open]:focus-within{ min-width: var(--uc-urlbar-min-width,none) !important; }
 
   /* Hide dropdown placeholder */
-  #urlbar-container:not(:hover) .urlbar-history-dropmarker {
-    margin-inline-start: -28px;
-  }
+  #urlbar-container:not(:hover) .urlbar-history-dropmarker{ margin-inline-start: -28px; }
+  
 }
 /* Fix customization view */
-#customization-panelWrapper > .panel-arrowbox > .panel-arrow {
-  margin-inline-end: initial !important;
-}
-/* ========================================================================================= */
+#customization-panelWrapper > .panel-arrowbox > .panel-arrow{ margin-inline-end: initial !important; }
 
 /* ========================================================================================= */
 /* Makes panels, menupopups, urlbar and searchbar rounded */
@@ -217,12 +204,8 @@ panel[type="arrow"] {
 
 /* ========================================================================================= */
 /* Makes menubar appear as overlay in the top left corner */
-/* Dummy variable to support both versions 89-90 */
-:root {
-  --tab-block-margin: var(--proton-tab-block-margin);
-}
 
-#toolbar-menubar {
+#toolbar-menubar{
   position: fixed;
   display: flex;
   top: 0;
@@ -231,54 +214,45 @@ panel[type="arrow"] {
   z-index: 10;
 }
 
-#toolbar-menubar[autohide="true"][inactive="true"] {
-  height: 0px !important;
-}
+#toolbar-menubar[autohide="true"][inactive="true"]{ height: 0px !important; }
 
-:root[tabsintitlebar][sizemode="maximized"] #toolbar-menubar {
-  top: 8px;
-}
+#toolbar-menubar > spacer{ flex-grow: 1 }
+#toolbar-menubar[inactive] > .titlebar-buttonbox-container{ display: none }
 
-#toolbar-menubar > spacer {
-  flex-grow: 1;
-}
-#toolbar-menubar[inactive] > .titlebar-buttonbox-container {
-  display: none;
-}
-
-#main-menubar {
-  height: calc(var(--tab-min-height) + 2 * var(--tab-block-margin, 0px));
+#main-menubar{
+  height: calc(var(--tab-min-height) +  2 * var(--tab-block-margin,0px));
   background-color: var(--arrowpanel-background);
   color: var(--arrowpanel-color);
 }
 
-#menubar-items {
-  -moz-box-orient: horizontal !important;
+#menubar-items{
+  flex-direction: row !important;
 }
-#menubar-items::after {
+#menubar-items::after{
   content: "";
-  display: -moz-box;
+  display: flex;
   width: 30px;
-  height: calc(var(--tab-min-height) + 2 * var(--tab-block-margin, 0px));
-  background-image: linear-gradient(
-    to right,
-    var(--arrowpanel-background) 30%,
-    transparent
-  );
+  height: calc(var(--tab-min-height) +  2 * var(--tab-block-margin,0px));
+  background-image: linear-gradient(to right, var(--arrowpanel-background) 30%, transparent);
 }
 
-@supports -moz-bool-pref("layout.css.osx-font-smoothing.enabled") {
-  #toolbar-menubar[autohide="true"]:not([inactive])
-    > .titlebar-buttonbox-container {
-    display: none;
-  }
+@media (-moz-gtk-csd-reversed-placement){
+  #toolbar-menubar[autohide="true"]:not([inactive]) > .titlebar-buttonbox-container{ display: none }  
 }
 /* ========================================================================================= */
 
-/* S E T T I N G S */
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/autohide_navigation_button.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
 
-/* H I D I N G   E L E M E N T S */
-/* Comment or uncomment depending of what elements you want to hide */
+/* Hides navigation-buttons (back/forward/stop/reload) buttons and shows them when cursor is over the right edge of urlbar  */
+/* Disabled button are completely hidden, such as back-button when there is no page to go back to */
+
+/* To set this up you need to customize the order of items to be such that layout from LEFT to RIGHT is 
+urlbar
+flexible space
+navigation-buttons in any order
+ */
+/* The order of items before urlbar and after navigation-buttons doesn't matter */
 
 /* Back button */
 /* #back-button {display: none !important} */
@@ -336,32 +310,6 @@ panel[type="arrow"] {
   background: transparent !important;
   box-shadow: none !important;
 }
-
-/* A U T O  H I D E */
-/* Uncomment relavent Sections */
-
-/* Configuration 1 - START */
-/* Hide Unless focused with CMD/Ctrl - L or In a New Tab */
-/* Adapted from https://superuser.com/a/1497982/1189696 */
-
-/* Adjusts gap to hover over */
-/*
-#navigator-toolbox:not(:hover) {
-  height: 4px !important; 
-  min-height: 0px !important;
-  overflow: hidden !important;
-}
-
-#navigator-toolbox:focus,
-#navigator-toolbox:focus-within,
-#navigator-toolbox:active,
-#urlbar[focused="true"] {
-  height: auto !important;
-  overflow: visible !important;
-}
-*/
-
-/* Configuration 1 - END */
 
 /* userChrome.css for a cleaner looking navBar in FireFox. This is experimental */
 /* Made by Tim Krief https://links.timkrief.com */
@@ -463,17 +411,18 @@ See the above repository for updates as well as full license text. */
   display: none
 }
 .tab-icon-image:not([src]){
-  display: -moz-box !important;
+  display: block !important;
 }
 .tab-icon-stack > *{ margin-inline: 0 !important; }
-.tabbrowser-tab{ -moz-box-flex: 0 !important; }
+.tabbrowser-tab{
+  flex-grow: 0 !important;
+}
 
 .tabbrowser-tab[fadein]{ min-width: calc(16px + 2 * 10px + 4px) !important; }
 :root[uidensity="compact"] .tabbrowser-tab[fadein]{
   min-width: calc(16px + 2 * var(--inline-tab-padding,0px) + 4px) !important;
 }
 :root:not([uidensity="compact"]) .tab-content{ padding-inline: 10px !important; }
-
 /* END OF ICON ONLT TABS */
 
 /* If one uses custom Windows theme, then Firefox uses high-contrast window control buttons. This style makes Firefox fall back to using normal window control style. */
@@ -491,11 +440,12 @@ See the above repository for updates as well as full license text. */
 .titlebar-restore{ list-style-image: url(chrome://browser/skin/window-controls/restore.svg) !important }
 
 /* Always show tab close button on hover and never otherwise */
-#tabbrowser-tabs #tabs-newtab-button{
+.tabbrowser-tab .tab-close-button{
   display:none;
 }
-#tabbrowser-tabs:hover #tabs-newtab-button{
-  display:-moz-box !important;
+.tabbrowser-tab:not([pinned]):hover .tab-close-button{
+  display: flex !important;
+  align-items: center;
 }
 
 /* remove margin between hamburger menu and tab */

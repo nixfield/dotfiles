@@ -52,7 +52,7 @@ zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 # More completions https://github.com/zsh-users/zsh-completions
 
 # Key-bindings
-bindkey -s '^o' 'ranger^M'
+# bindkey -s '^o' 'ranger^M'
 bindkey -s '^f' "fzf --preview 'bat {}'^M"
 # bindkey -s '^s' 'ncdu^M'
 # bindkey -s '^n' 'nvim $(fzf)^M'
@@ -92,3 +92,4 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 eval "$(zoxide init zsh)"
 # eval "`pip completion --zsh`"
 # eval "$(thefuck --alias)"
+

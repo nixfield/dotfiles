@@ -5,9 +5,9 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font ="JetBrainsMono Nerd Font:style=Medium:pixelsize=12:antialias=true:autohint=true";
-static char *font2[] ={"JetBrainsMono Nerd Font Bandit:style=Medium:pixelsize=10:antialias=true:autohint=true"};
-static int borderpx = 2;
+static char *font = "JetBrainsMono Nerd Font :pixelsize=15:antialias=true:autohint=true";
+static char *font2[] = { "JetBrainsMono Nerd Font :pixelsize=15:antialias=true:autohint=true" };
+static int borderpx = 0;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -114,7 +114,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.9;
+float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -249,7 +249,6 @@ static char *copyurlcmd[] = { "/bin/sh", "-c",
 
 static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
 
-static char *copyoutput_noprompt[] = { "/bin/sh", "-c", "st-copyout noprompt", "externalpipe", NULL };
 static Shortcut shortcuts[] = {
   /* mask                 keysym          function        argument */
   { XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
@@ -260,17 +259,17 @@ static Shortcut shortcuts[] = {
   { MODKEY,              XK_period,        zoom,           {.f = -1} },
   { MODKEY,               XK_g,        zoomreset,      {.f =  0} },
   { ControlMask | ShiftMask,               XK_C,           clipcopy,       {.i =  0} },
-  { ControlMask | ShiftMask,               XK_V,           clippaste,      {.i =  0} },
   { ShiftMask,            XK_Insert,      clippaste,      {.i =  0} },
+  { ControlMask | ShiftMask,               XK_V,           clippaste,      {.i =  0} },
   { XK_ANY_MOD,		Button2,	selpaste,	{.i =  0} },
   { MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
-  { MODKEY,               XK_Control_L,   iso14755,       {.i =  0} },
+  { ControlMask | ShiftMask,               XK_U,           iso14755,       {.i =  0} },
   { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
   { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
   { MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
   { MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
-  { MODKEY,               XK_k,           kscrollup,      {.i =  1} },
-  { MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
+  // { MODKEY,               XK_k,           kscrollup,      {.i =  1} },
+  // { MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
   { MODKEY,               XK_Up,          kscrollup,      {.i =  1} },
   { MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
   { MODKEY,               XK_u,           kscrollup,      {.i = -1} },
@@ -284,10 +283,9 @@ static Shortcut shortcuts[] = {
   { TERMMOD,              XK_J,           zoom,           {.f = -1} },
   { TERMMOD,              XK_U,           zoom,           {.f = +2} },
   { TERMMOD,              XK_D,           zoom,           {.f = -2} },
-  { MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
-  { MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
-	{ MODKEY,               XK_p,           externalpipe,   {.v = copyoutput } },
-  { MODKEY,               XK_o,           externalpipe,   {.v = copyoutput_noprompt } },
+  { ControlMask | ShiftMask,               XK_L,           externalpipe,   {.v = openurlcmd } },
+  { ControlMask | ShiftMask,               XK_Y,           externalpipe,   {.v = copyurlcmd } },
+  { ControlMask | ShiftMask,               XK_O,           externalpipe,   {.v = copyoutput } },
   { ControlMask | ShiftMask,              XK_Return,      newterm,        {.i =  0} },
 
 };

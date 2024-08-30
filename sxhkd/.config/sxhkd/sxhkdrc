@@ -57,7 +57,7 @@ super + Print
 super + Delete
     dmenurecord kill
 
-super + Insert
+super + shift + Insert
     clipmenu
 
 # pulseaudio controls speaker volume up & down
@@ -191,8 +191,8 @@ alt + XF86AudioMute
 #   scratchpads terminal
 # -----------------------------------------------------------------------------
 
-alt + Tab
-    skippy-xd
+# alt + Tab
+#     skippy-xd
 
 super + BackSpace
     sysact

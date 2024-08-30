@@ -114,7 +114,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 1.0;
+float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -268,8 +268,8 @@ static Shortcut shortcuts[] = {
   { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
   { MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
   { MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
-  { MODKEY,               XK_k,           kscrollup,      {.i =  1} },
-  { MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
+  // { MODKEY,               XK_k,           kscrollup,      {.i =  1} },
+  // { MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
   { MODKEY,               XK_Up,          kscrollup,      {.i =  1} },
   { MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
   { MODKEY,               XK_u,           kscrollup,      {.i = -1} },
@@ -283,10 +283,10 @@ static Shortcut shortcuts[] = {
   { TERMMOD,              XK_J,           zoom,           {.f = -1} },
   { TERMMOD,              XK_U,           zoom,           {.f = +2} },
   { TERMMOD,              XK_D,           zoom,           {.f = -2} },
-  { MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
-  { MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
-  { MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
-  { TERMMOD,              XK_Return,      newterm,        {.i =  0} },
+  { ControlMask | ShiftMask,               XK_L,           externalpipe,   {.v = openurlcmd } },
+  { ControlMask | ShiftMask,               XK_Y,           externalpipe,   {.v = copyurlcmd } },
+  { ControlMask | ShiftMask,               XK_O,           externalpipe,   {.v = copyoutput } },
+  { ControlMask | ShiftMask,              XK_Return,      newterm,        {.i =  0} },
 
 };
 
